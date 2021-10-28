@@ -1,0 +1,33 @@
+
+{
+  "peso":1.0,
+  "id":1,
+  "fecha":"ed",
+  "fotos":{
+      "small":"hdjhdjd",
+      "medium":"ljdlk",
+      "large":"fkhkfh"
+
+
+  }
+
+
+}
+
+
+
+
+
+
+
+
+export interface CONTROL{
+    peso:number,
+    foto:string,
+    id:number,
+    fecha?:string,
+    fotos?: {
+    small: string,
+    medium: string,
+    large: string
+    }

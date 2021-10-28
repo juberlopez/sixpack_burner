@@ -1,0 +1,91 @@
+{
+    "user": {
+        "id": 54,
+        "usuario": "Steven realpe",
+        "correo": "elitenutritiongroup2019@gmail.com",
+        "numero_celular": 3175346352,
+        "ciudad": "CALI (VAL)",
+        "foto": "https://retoburnerstack.megaplexstars.com/uploads/usuarios/54/profile.jpg",
+        "json_datos": {
+            "usuario": {
+                "id_usuario": 54,
+                "nombres": "Steven realpe"
+            },
+            "antro": {
+                "aumento": 45,
+                "kgmuscle": 44.8,
+                "calorias": 1822
+            },
+            "nutricionista": {
+                "id_usuario": 6394880,
+                "nombres": "STEVEN REALPE",
+                "rol": "ADMIN"
+            },
+            "panel": {
+                "MinutosEntreno": 60,
+                "Hora_levantarse": "06:00",
+                "Hora_DESAYUNO": "06:30",
+                "Hora_Entreno": "16:30",
+                "Hora_almuerzo": "12:30",
+                "Hora_cena": "20:00",
+                "Hora_dormir": "22:00"
+            },
+            "objetivo": "PERDER GRASA CORPORAL",
+            "genero": "MASCULINO",
+            "vegetariano": false,
+            "datos_antro": {
+                "peso": "85",
+                "estatura": 173,
+                "frecuencia_entreno": "ENTRENA 3-4 VECES POR SEMANA",
+                "edad": "39",
+                "porcentaje_grasa": 12,
+                "peso_oseo": 9.5,
+                "peso_residual": 20.5,
+                "porcentaje_residual": 24.1,
+                "peso_grasa": 10.2,
+                "porcentaje_muscle": 52.7,
+                "peso_muscle": 44.8,
+                "porcentaje_oseo": 11.2,
+                "imc": 28.4
+            },
+            "producto": "BI PRO",
+            "batido": true
+        },
+        "json_dietas": {
+            "dietas": [
+                {
+                    "menu": 1,
+                    "alimentos": [
+                        {
+                            "proteina": 0,
+                            "chos": 0,
+                            "grasa": 0,
+                            "calorias": 0,
+                            "cantidad": 1,
+                            "cantidad_min": 0,
+                            "cantidad_max": 0,
+                            "objetivo": "PERDER GRASA CORPORAL",
+                            "clave": "-",
+                            "menu": "A",
+                            "comida": "AL DESPERTARSE",
+                            "producto": "BI PRO",
+                            "detalle": "BÁSICA",
+                            "alimento": "Scoop de Burner Stack",
+                            "hora": 1630580400000,
+                            "id_detalle": 2475,
+                            "id_maestro": 160,
+                            "id_tabla": 343
+                        }
+                    ]
+                }
+            ],
+            "info": {
+                "calorias_dieta": 1849,
+                "chos": 125,
+                "proteina": 269,
+                "grasa": 31
+            }
+        }
+    },
+    "state": "FULL"
+}

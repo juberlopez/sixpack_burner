@@ -1,0 +1,1 @@
+export 'repositories/persistent_device.dart';

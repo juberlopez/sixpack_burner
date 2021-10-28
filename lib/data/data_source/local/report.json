@@ -1,0 +1,46 @@
+{
+    "genero": "de",
+    "panel": {
+        "Hora_levantarse": "ww",
+        "Hora_Entreno": "",
+        "Hora_DESAYUNO": "",
+        " Hora_almuerzo": "",
+        "MinutosEntreno": 1,
+        "Hora_cena": "",
+        "Hora_dormir": ""
+    },
+    "usuario": {
+        "nombres": "",
+        "id_usuario": 1
+    },
+    "nutricionista": {
+        "id_usuario": 1,
+        "nombres": "",
+        "rol": "ROL"
+    },
+    "objetivo": "OBJETIVO",
+    "producto": "PRODUCTO",
+    "antro": {
+        "calorias": 1,
+        "aumento": 1,
+        "kgmuscle": 1
+    },
+    "vegetariano": true,
+    "datos_antro": {
+        "porcentaje_grasa": 1,
+        "peso_grasa": 1,
+        "peso_oseo": 1,
+        "peso_residual": 1,
+        "porcentaje_residual": 1,
+        "peso_muscle ": 1,
+        "porcentaje_muscle": 1,
+        "porcentaje_oseo": 1,
+        "peso": 1,
+        "estatura": 1,
+        "visceral": 1,
+        "imc": 1,
+        "msg": "",
+        "frecuencia_entreno": "",
+        "edad": 1
+    }
+}
