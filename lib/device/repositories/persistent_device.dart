@@ -85,7 +85,14 @@ class PersitentDevice {
     return await _storage!.read(key: "user");
   }
 
-  
+Future<int?> getMenu() async {
+final menu= await _storage!.read(key: "menu");
+print("menu $menu");
+return menu!=null ? int.parse(menu)-1 : 0;
+}
+    Future<void> setMenu(int menu) async {
+    await _storage!.write(key: "menu", value: "$menu");
+  }
 
   Future<void> deleteUser() async {
     await _storage!.delete(key: "user");

@@ -1,7 +1,7 @@
-import 'package:burnet_stack/domain/domain.dart';
-import 'package:burnet_stack/presentations/ui/home/profile/cubit/profile_cubit.dart';
-import 'package:burnet_stack/presentations/ui/theme/app_theme.dart';
-import 'package:burnet_stack/presentations/ui/widgets/type_image_source.dart';
+import 'package:sixpackburner/domain/domain.dart';
+import 'package:sixpackburner/presentations/ui/home/profile/cubit/profile_cubit.dart';
+import 'package:sixpackburner/presentations/ui/theme/app_theme.dart';
+import 'package:sixpackburner/presentations/ui/widgets/type_image_source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

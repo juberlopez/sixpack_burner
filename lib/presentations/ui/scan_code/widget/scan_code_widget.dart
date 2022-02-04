@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:burnet_stack/presentations/cubits/authentication_cubit/authentication_cubit.dart';
-import 'package:burnet_stack/presentations/ui/widgets/loading_indicator.dart';
+import 'package:sixpackburner/presentations/cubits/authentication_cubit/authentication_cubit.dart';
+import 'package:sixpackburner/presentations/ui/widgets/loading_indicator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

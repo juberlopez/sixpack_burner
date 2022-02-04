@@ -1,6 +1,7 @@
-import 'package:burnet_stack/domain/domain.dart';
-import 'package:burnet_stack/presentations/ui/home/recetas/cubit/recetas_cubit.dart';
-import 'package:burnet_stack/presentations/ui/theme/app_theme.dart';
+import 'package:flutter/services.dart';
+import 'package:sixpackburner/domain/domain.dart';
+import 'package:sixpackburner/presentations/ui/home/recetas/cubit/recetas_cubit.dart';
+import 'package:sixpackburner/presentations/ui/theme/app_theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +21,14 @@ class _DetalleRetoWidgetState extends State<DetalleRetoWidget> {
   @override
   void initState() {
     super.initState();
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle( statusBarColor: Colors.transparent));
   }
+
+@override
+void dispose(){
+   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle( statusBarColor: Colors.blueAccent));
+  super.dispose();
+}
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +40,7 @@ class _DetalleRetoWidgetState extends State<DetalleRetoWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: 200,
+              height: 300,
               child: FractionallySizedBox(
                   child: FadeInImage(
                 image: NetworkImage(widget.challengeModel.image.toString()),
@@ -75,7 +83,7 @@ class _DetalleRetoWidgetState extends State<DetalleRetoWidget> {
             Expanded(
               child: SingleChildScrollView(
                   child: Padding(
-                padding: const EdgeInsets.only(top:15,left: 20,right: 20),
+                padding: const EdgeInsets.only(top:15,left: 20,right: 20, bottom: 30),
                 child: Column(
                   children: [Text(widget.challengeModel.data.toString())],
                 ),

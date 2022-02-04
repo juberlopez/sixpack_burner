@@ -3,6 +3,7 @@ import 'dart:convert';
 class RegisterEntityRequest {
     RegisterEntityRequest({
         this.ciudad,
+        this.so,
         this.usuario,
         this.correo,
         this.numeroCelular,
@@ -16,7 +17,7 @@ class RegisterEntityRequest {
     int ?numeroCelular;
     String ?pass;
     String ?idToken;
-
+String ?so;
     factory RegisterEntityRequest.fromJson(String str) => RegisterEntityRequest.fromMap(json.decode(str));
 
     String toJson() => json.encode(toMap());
@@ -37,5 +38,6 @@ class RegisterEntityRequest {
         "numero_celular": numeroCelular,
         "pass": pass,
         "id_token": idToken,
+        "so": so
     };
 }

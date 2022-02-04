@@ -1,6 +1,6 @@
-import 'package:burnet_stack/domain/domain.dart';
-import 'package:burnet_stack/presentations/ui/home/mi_progreso/cubit/mi_progreso_cubit.dart';
-import 'package:burnet_stack/presentations/ui/theme/app_theme.dart';
+import 'package:sixpackburner/domain/domain.dart';
+import 'package:sixpackburner/presentations/ui/home/mi_progreso/cubit/mi_progreso_cubit.dart';
+import 'package:sixpackburner/presentations/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:quiver/iterables.dart';
@@ -26,12 +26,23 @@ class _CarouselControlState extends State<CarouselControl> {
   Widget build(BuildContext context) {
     final List<Widget> contenidoItems = widget.listaProgresos
         .map(
-          (item) => Container(
-            height: 100,
+          (item){
+           var index = widget.listaProgresos.indexOf(item)+1;
+           print(index.toString());
+            return Container(
+            height: 150,
             width: 250,
-            decoration: BoxDecoration(
+            margin:  EdgeInsets.only(bottom:20),
+               decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Colors.white,
+                  boxShadow: const <BoxShadow>[
+BoxShadow(color: Colors.black26,
+blurRadius: 10.0,
+spreadRadius: 2.0,
+offset: Offset(2.0, 5.0)
+)
+]
             ),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -43,13 +54,13 @@ class _CarouselControlState extends State<CarouselControl> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.white,
-                    ),
+                         ),
                     child: ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(15.0)),
                         child: FadeInImage(
                           image: NetworkImage(item.fotos!.small.toString()),
                           placeholder:
-                              AssetImage('assets/images/logo_reto.png'),
+                              AssetImage('assets/images/load.jpg'),
                           fit: BoxFit.cover,
                           width: double.infinity,
                         )),
@@ -65,7 +76,7 @@ class _CarouselControlState extends State<CarouselControl> {
                         style: AppTheme.text16,
                       ),
                       Text(
-                        "Control " + (item.id! + 1).toString(),
+                        "Control " + index.toString(),
                         style: AppTheme.text15,
                       ),
                       Text(
@@ -80,18 +91,17 @@ class _CarouselControlState extends State<CarouselControl> {
                                 builder: (BuildContext context) {
                                   return AlertDialog(
                                     title: Text('Desea eliminar el registro'),
-                                    content: Text(
-                                        "Si aceptas la foto de este registro sera eliminada de nustra base de datos,para participar en el concurso es necesario registrar 4 fotos en periodos de 10 dias."),
+                                    content: Text("Si aceptas la foto de este registro sera eliminada de nuestra base de datos."),
                                     actions: <Widget>[
-                                      FlatButton(
+                                      TextButton(
                                           child: Text("Cancelar"),
-                                          textColor: Colors.red,
+                                                 style: TextButton.styleFrom( primary: Colors.red ),
                                           onPressed: () {
                                             Navigator.of(context).pop();
                                           }),
-                                      FlatButton(
+                                      TextButton(
                                           child: Text("Eliminar Foto"),
-                                          textColor: Colors.blue,
+                                         style: TextButton.styleFrom( primary: Colors.red ),
                                           onPressed: () {
                                             context
                                                 .read<MiProgresoCubit>()
@@ -111,7 +121,8 @@ class _CarouselControlState extends State<CarouselControl> {
                 ],
               ),
             ),
-          ),
+          );
+          }
         )
         .toList();
     return Container(
@@ -123,10 +134,10 @@ class _CarouselControlState extends State<CarouselControl> {
             CarouselSlider(
               items: contenidoItems,
               options: CarouselOptions(
-                  height: 170,
+                  height: 180,
                   viewportFraction: 0.8,
-                  //enlargeCenterPage: true,
-                  aspectRatio: 2.0,
+                  // enlargeCenterPage: true,
+                  // aspectRatio: 2.0,
                   onPageChanged: (index, reason) {
                     setState(() {
                       _current = index;

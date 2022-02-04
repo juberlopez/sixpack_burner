@@ -3,16 +3,20 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:burnet_stack/device/device.dart';
-import 'package:burnet_stack/domain/domain.dart';
-import 'package:burnet_stack/domain/models/response_model.dart';
-import 'package:burnet_stack/presentations/services/screen_messages_service.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/widgets.dart';
+import 'package:sixpackburner/device/device.dart';
+import 'package:sixpackburner/domain/domain.dart';
+import 'package:sixpackburner/domain/models/response_model.dart';
+import 'package:sixpackburner/presentations/services/screen_messages_service.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:http/http.dart' as http;
 
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:sixpackburner/presentations/ui/home/view/home_view.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:socket_io_client/socket_io_client.dart';
 
@@ -48,7 +52,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   Future<void> initSocket() async {
     /*try {
-      socket = IO.io('https://retoburnerstack.megaplexstars.com',
+      socket = IO.io('https://sixpackburner.megaplexstars.com',
           OptionBuilder().setTransports(['websocket']).build());
 
       socket.onConnect((_) {
@@ -70,7 +74,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     }*/
   }
 
-  Future<void> signInwithEmail(String email, String clave) async {
+  Future<void> signInwithEmail(String email, String clave, BuildContext context) async {
     emit(state.copyWith(status: StatusAuthentication.loading));
 
     final respuesta =
@@ -86,10 +90,28 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         emit(state.copyWith(status: StatusAuthentication.no_autenticado));
         ScreenMessagesService().toast(e.message.toString());
       }
-    }, (response) {
+    }, (response) async {
       //ScreenMessages().toast("No existe Usuario");
+print("autenticado:1");
 
+  FirebaseMessaging.instance.subscribeToTopic('burnersixpack').then((value) {
+    print("Subscrito a burnersixpack");
+  })
+  .catchError((onError){
+print(onError);
+  });
+
+await Firebase.initializeApp();
+String? token= await FirebaseMessaging.instance.getToken();
+            print("token generado:"+ token.toString());
+ _authenticationRepository.updateToken(token.toString()).then((value) => null);
+ Navigator.pushNamedAndRemoveUntil(context, HomeView.routeName, (r) => false);
       emit(state.copyWith(status: StatusAuthentication.autenticado));
+
+
+
+
+
     });
   }
 
@@ -114,7 +136,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
         print(dataDos);
 
-        if (dataDos.contains("BURNER")) {
+        // if (dataDos.contains("BURNER")) {
           final respuesta = await _generalRepository.registroQr(dataDos);
 
           respuesta.fold((e) {
@@ -129,10 +151,10 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
                 //status: StatusAuthentication.autenticado,
                 qr: qrModel));
           });
-        } else {
-          ScreenMessagesService().toast("El código QR no es de Burner Stack");
-          emit(state.copyWith(statusQr: StatusAuthentication.initial));
-        }
+        // } else {
+        //   ScreenMessagesService().toast("El código QR no es de Burner Stack");
+        //   emit(state.copyWith(statusQr: StatusAuthentication.initial));
+        // }
         //me.validate(qr);
       } catch (error) {
         ScreenMessagesService().toast(error.toString());
@@ -141,7 +163,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       }
       print(code);
     } else {
-      ScreenMessagesService().toast("El código QR no es de Burner Stack");
+      ScreenMessagesService().toast("El código QR no es de nutramerican");
       emit(state.copyWith(statusQr: StatusAuthentication.initial));
     }
 
@@ -229,6 +251,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       if (user!.isNotEmpty) {
         
         FirebaseMessaging.instance.getToken().then((token) {
+          print("TOKEN"+token.toString());
           _authenticationRepository.updateToken(token.toString()).then((value) {
             ResponseModel data = value as ResponseModel;
             PersitentDevice().setState(data.data);
@@ -271,11 +294,13 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   }
 
   Future<void> logOut() async {
+    print("close");
     await PersitentDevice().deleteData();
+    
     emit(state.copyWith(
       status: StatusAuthentication.logout,
     ));
-  }
+      }
 
   Future<void> createUser(
       String email, String password, String nombre, String rol) async {
@@ -303,9 +328,9 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     }*/
   }
 
-  Future<void> registerUser(FormGroup form, String ciudad) async {
+  Future<void> registerUser(FormGroup form, String ciudad, String so) async {
     emit(state.copyWith(status: StatusAuthentication.loading));
-
+  print("El sistema operativo es: ${so}");
     var dataForm = form.value.values.toList();
     var nombre = dataForm[0];
     var contrasena = dataForm[1];
@@ -316,6 +341,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         correo: correo.toString(),
         password: contrasena.toString(),
         ciudad: ciudad,
+        so: so,
         numeroCelular: numeroCelular.toString(),
         nombre: nombre.toString());
 
@@ -325,7 +351,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     }, (response) {
       ResponseModel responseModel = response;
       UserPlusModel user = responseModel.data;
-      /*socket = IO.io('https://retoburnerstack.megaplexstars.com',
+      /*socket = IO.io('https://sixpackburner.megaplexstars.com',
           OptionBuilder().setTransports(['websocket']).build());*/
 
       PersitentDevice().setState("AUTH");

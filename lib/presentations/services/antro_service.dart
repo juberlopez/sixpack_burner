@@ -1,4 +1,4 @@
-import 'package:burnet_stack/domain/domain.dart';
+import 'package:sixpackburner/domain/domain.dart';
 
 class AntroService {
   

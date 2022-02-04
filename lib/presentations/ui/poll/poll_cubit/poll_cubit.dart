@@ -1,13 +1,15 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:ui';
 import 'package:bloc/bloc.dart';
-import 'package:burnet_stack/data/data.dart';
-import 'package:burnet_stack/device/repositories/persistent_device.dart';
-import 'package:burnet_stack/domain/domain.dart';
-import 'package:burnet_stack/presentations/app.dart';
-import 'package:burnet_stack/presentations/constant/constant.dart';
-import 'package:burnet_stack/presentations/services/antro_service.dart';
-import 'package:burnet_stack/presentations/services/screen_messages_service.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:sixpackburner/data/data.dart';
+import 'package:sixpackburner/device/repositories/persistent_device.dart';
+import 'package:sixpackburner/domain/domain.dart';
+import 'package:sixpackburner/presentations/app.dart';
+import 'package:sixpackburner/presentations/constant/constant.dart';
+import 'package:sixpackburner/presentations/services/antro_service.dart';
+import 'package:sixpackburner/presentations/services/screen_messages_service.dart';
 import 'package:equatable/equatable.dart';
 import "package:collection/collection.dart";
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -99,8 +101,7 @@ class PollCubit extends Cubit<PollState> {
     if (state.horaAlmuerzo.isEmpty ||
         state.horaDespierta.isEmpty ||
         state.horaDesayuno.isEmpty ||
-        state.horaEntrena.isEmpty ||
-        state.horaCena.isEmpty) {
+       state.horaCena.isEmpty) {
       ScreenMessagesService()
           .toast("Por favor ingresa los datos para continuar");
       return false;
@@ -283,7 +284,8 @@ class PollCubit extends Cubit<PollState> {
   ) async {
     emit(state.copyWith(horaCena: hora));
   }
-
+ Future noEntrena() async {  emit(state.copyWith(producto: "NINGUNO")); }
+void next()=> _save();
   Future producto(
     String producto,
   ) async {
@@ -345,7 +347,8 @@ class PollCubit extends Cubit<PollState> {
             horaAlmuerzo: state.horaAlmuerzo,
             horaCena: state.horaCena,
             horaDormir: "22:00",
-            minutosEntreno: AppConstant.TIEMPO_ENTRENO[state.tiempoEntreno]),
+            minutosEntreno: AppConstant.TIEMPO_ENTRENO[state.tiempoEntreno] ?? 0
+                        ),
         antro: AntroModel(
             aumento:
                 AntroService().frecuencyTraining(state.nivelActividadFisica),
@@ -361,14 +364,21 @@ class PollCubit extends Cubit<PollState> {
     respuesta.fold((e) {
       emit(state.copyWith(status: StatusPoll.initial));
       ScreenMessagesService().toast(e.message.toString());
-    }, (response) {
+    }, (response) async {
 
-        FirebaseMessaging.instance.getToken().then((token) {
+  FirebaseMessaging.instance.subscribeToTopic('burnersixpack').then((value) {
+    print("Subscrito a burnersixpack");
+  })
+  .catchError((onError){
+print(onError);
+  });
 
-               _authenticationRepository.updateToken(token.toString()).then((value) => null);
+await Firebase.initializeApp();
+String? token= await FirebaseMessaging.instance.getToken();
+            print("token generado:"+ token.toString());
+ _authenticationRepository.updateToken(token.toString()).then((value) => null);
 
-            });
-            
+
       Info info = response.data;
       emit(state.copyWith(
           status: StatusPoll.finish,
@@ -379,26 +389,116 @@ class PollCubit extends Cubit<PollState> {
     });
   }
 
+
+  Future<void> initNotificationTest(bool notificacion) async {
+    print("notificación: $notificacion");
+   if (notificacion) {
+      await flutterLocalNotificationsPlugin.cancelAll();
+      var comidas = {
+        'AL DESPERTARSE':
+            "https://sixpackburner.megaplexstars.com/images/comidas/despertar.jpg",
+        "DESAYUNO":
+            "https://sixpackburner.megaplexstars.com/images/comidas/desayuno.jpg",
+        'MEDIA MAÑANA':
+            'https://sixpackburner.megaplexstars.com/images/comidas/mediodia.jpg',
+        "ALMUERZO":
+            'https://sixpackburner.megaplexstars.com/images/comidas/almuerzo.jpg',
+        'MEDIA TARDE':
+            'https://sixpackburner.megaplexstars.com/images/comidas/mediatarde.jpg',
+        "MERIENDA":
+            'https://sixpackburner.megaplexstars.com/images/comidas/comidas_media.jpg',
+        "CENA":
+            'https://sixpackburner.megaplexstars.com/images/comidas/cena.jpg',
+        "POST ENTRENO":
+            'https://sixpackburner.megaplexstars.com/images/comidas/cena.jpg',
+      };
+      String? data = await PersitentDevice().getDietas();
+      JsonDietasModel jsonDietasModel = JsonDietasModel.fromRawJson(data!);
+print("dieta ${data}");
+      Map<String?, List<AlimentoModel>>? comidasPlus = jsonDietasModel
+          .dietas![0].alimentos!
+          .map((e) => e)
+          .groupListsBy((element) => element.comida);
+
+      /*await flutterLocalNotificationsPlugin.periodicallyShow(
+          0,
+          'repeating title',
+          'repeating body',
+          RepeatInterval.everyMinute,
+          notificationDetails);*/
+
+      comidasPlus.forEach((key, value) async {
+        String img = comidas[key.toString()] as String;
+print("comidas ${value[0].cantidad.toString()}: ${value[0].alimento.toString()}");
+        final String bigPicturePath =
+            await _downloadAndSaveFile(img, key.toString() + '.jpg');
+        final IOSNotificationDetails iOSPlatformChannelSpecifics =
+            IOSNotificationDetails(attachments: <IOSNotificationAttachment>[
+          IOSNotificationAttachment(bigPicturePath)
+        ]);
+   final androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'repeatDailyAtTime channel id',
+      'repeatDailyAtTime channel name',
+      'repeatDailyAtTime description',
+      importance: Importance.max,
+      // sound: 'slow_spring_board',
+      ledColor: Color(0xFF3EB16F),
+      ledOffMs: 1000,
+      ledOnMs: 1000,
+      enableLights: true,
+    );
+        final NotificationDetails notificationDetails = NotificationDetails(
+          iOS: iOSPlatformChannelSpecifics, android: androidPlatformChannelSpecifics
+        );
+
+        String body =
+            value[0].cantidad.toString() + " " + value[0].alimento.toString();
+        int id = value[0].hora! ~/ 10000;
+print(body+" hora: "+value[0].hora.toString());
+        flutterLocalNotificationsPlugin
+            .zonedSchedule(
+              id,
+              key.toString(),
+              body,
+              _nextInstanceOfTenAM(value[0].hora!),
+              notificationDetails,
+              androidAllowWhileIdle: true,
+              uiLocalNotificationDateInterpretation:
+                  UILocalNotificationDateInterpretation.absoluteTime,
+              matchDateTimeComponents: DateTimeComponents.time,
+            )
+            .then((value) => null);
+      });
+    } else {
+      await flutterLocalNotificationsPlugin.cancelAll();
+    }
+
+    PersitentDevice().setNotificacion(notificacion);
+    emit(state.copyWith(notification: notificacion));
+  }
+
+
+
   Future<void> initNotification(bool notificacion) async {
     if (notificacion) {
       await flutterLocalNotificationsPlugin.cancelAll();
       var comidas = {
         'AL DESPERTARSE':
-            "https://retoburnerstack.megaplexstars.com/images/comidas/despertar.jpg",
+            "https://sixpackburner.megaplexstars.com/images/comidas/despertar.jpg",
         "DESAYUNO":
-            "https://retoburnerstack.megaplexstars.com/images/comidas/desayuno.jpg",
+            "https://sixpackburner.megaplexstars.com/images/comidas/desayuno.jpg",
         'MEDIA MAÑANA':
-            'https://retoburnerstack.megaplexstars.com/images/comidas/mediodia.jpg',
+            'https://sixpackburner.megaplexstars.com/images/comidas/mediodia.jpg',
         "ALMUERZO":
-            'https://retoburnerstack.megaplexstars.com/images/comidas/almuerzo.jpg',
+            'https://sixpackburner.megaplexstars.com/images/comidas/almuerzo.jpg',
         'MEDIA TARDE':
-            'https://retoburnerstack.megaplexstars.com/images/comidas/mediatarde.jpg',
+            'https://sixpackburner.megaplexstars.com/images/comidas/mediatarde.jpg',
         "MERIENDA":
-            'https://retoburnerstack.megaplexstars.com/images/comidas/comidas_media.jpg',
+            'https://sixpackburner.megaplexstars.com/images/comidas/comidas_media.jpg',
         "CENA":
-            'https://retoburnerstack.megaplexstars.com/images/comidas/cena.jpg',
+            'https://sixpackburner.megaplexstars.com/images/comidas/cena.jpg',
         "POST ENTRENO":
-            'https://retoburnerstack.megaplexstars.com/images/comidas/cena.jpg',
+            'https://sixpackburner.megaplexstars.com/images/comidas/cena.jpg',
       };
       String? data = await PersitentDevice().getDietas();
       JsonDietasModel jsonDietasModel = JsonDietasModel.fromRawJson(data!);

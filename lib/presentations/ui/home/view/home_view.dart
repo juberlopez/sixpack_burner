@@ -1,15 +1,16 @@
-import 'package:burnet_stack/domain/repositories/repositories.dart';
-import 'package:burnet_stack/presentations/ui/home/ajustes/cubit/ajustes_cubit.dart';
-import 'package:burnet_stack/presentations/ui/home/ajustes/view/ajustes_view.dart';
-import 'package:burnet_stack/presentations/ui/home/dietas/cubit/dieta_cubit.dart';
-import 'package:burnet_stack/presentations/ui/home/dietas/view/dietas_view.dart';
-import 'package:burnet_stack/presentations/ui/home/mi_progreso/cubit/mi_progreso_cubit.dart';
-import 'package:burnet_stack/presentations/ui/home/mi_progreso/view/mi_progreso_view.dart';
-import 'package:burnet_stack/presentations/ui/home/profile/cubit/profile_cubit.dart';
-import 'package:burnet_stack/presentations/ui/home/recetas/cubit/recetas_cubit.dart';
-import 'package:burnet_stack/presentations/ui/home/recetas/view/recetas_view.dart';
-import 'package:burnet_stack/presentations/ui/home/retos/cubit/retos_cubit.dart';
-import 'package:burnet_stack/presentations/ui/home/retos/view/retos_view.dart';
+import 'package:flutter/services.dart';
+import 'package:sixpackburner/domain/repositories/repositories.dart';
+import 'package:sixpackburner/presentations/ui/home/ajustes/cubit/ajustes_cubit.dart';
+import 'package:sixpackburner/presentations/ui/home/ajustes/view/ajustes_view.dart';
+import 'package:sixpackburner/presentations/ui/home/dietas/cubit/dieta_cubit.dart';
+import 'package:sixpackburner/presentations/ui/home/dietas/view/dietas_view.dart';
+import 'package:sixpackburner/presentations/ui/home/mi_progreso/cubit/mi_progreso_cubit.dart';
+import 'package:sixpackburner/presentations/ui/home/mi_progreso/view/mi_progreso_view.dart';
+import 'package:sixpackburner/presentations/ui/home/profile/cubit/profile_cubit.dart';
+import 'package:sixpackburner/presentations/ui/home/recetas/cubit/recetas_cubit.dart';
+import 'package:sixpackburner/presentations/ui/home/recetas/view/recetas_view.dart';
+import 'package:sixpackburner/presentations/ui/home/retos/cubit/retos_cubit.dart';
+import 'package:sixpackburner/presentations/ui/home/retos/view/retos_view.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
@@ -55,8 +56,8 @@ class _HomeViewState extends State<HomeView> {
     context.read<ProfileCubit>().init();
     context.read<MiProgresoCubit>().init();
 
-    
-
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle( statusBarColor: Colors.blueAccent));
+ 
     super.initState();
   }
 
@@ -80,7 +81,7 @@ class _HomeViewState extends State<HomeView> {
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.white,
         iconSize: 25.0,
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: Color(0xFF00AAFF),
         unselectedLabelStyle: TextStyle(
           fontFamily: 'Quicksand',
           fontWeight: FontWeight.w300,
@@ -175,7 +176,7 @@ class _HomeViewState extends State<HomeView> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xFF0699FB),
+        selectedItemColor: Color(0xFFE6E6E6),
         onTap: _onItemTapped,
       ),
     );

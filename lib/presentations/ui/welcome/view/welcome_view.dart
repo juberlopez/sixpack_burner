@@ -1,17 +1,17 @@
 import 'dart:io';
 
-import 'package:burnet_stack/domain/domain.dart';
-import 'package:burnet_stack/presentations/app.dart';
-import 'package:burnet_stack/presentations/cubits/authentication_cubit/authentication_cubit.dart';
-import 'package:burnet_stack/presentations/ui/home/view/home_view.dart';
-import 'package:burnet_stack/presentations/ui/login/view/login_view.dart';
-import 'package:burnet_stack/presentations/ui/notification/view/local_notification_view.dart';
-import 'package:burnet_stack/presentations/ui/notification/view/notification_view.dart';
-import 'package:burnet_stack/presentations/ui/poll/view/poll_view.dart';
-import 'package:burnet_stack/presentations/ui/register/view/register_view.dart';
-import 'package:burnet_stack/presentations/ui/scan_code/scan_code_view.dart';
-import 'package:burnet_stack/presentations/ui/welcome/widgets/carrusel_welcome.dart';
-import 'package:burnet_stack/presentations/ui/widgets/splash_page.dart';
+import 'package:sixpackburner/domain/domain.dart';
+import 'package:sixpackburner/presentations/app.dart';
+import 'package:sixpackburner/presentations/cubits/authentication_cubit/authentication_cubit.dart';
+import 'package:sixpackburner/presentations/ui/home/view/home_view.dart';
+import 'package:sixpackburner/presentations/ui/login/view/login_view.dart';
+import 'package:sixpackburner/presentations/ui/notification/view/local_notification_view.dart';
+import 'package:sixpackburner/presentations/ui/notification/view/notification_view.dart';
+import 'package:sixpackburner/presentations/ui/poll/view/poll_view.dart';
+import 'package:sixpackburner/presentations/ui/register/view/register_view.dart';
+import 'package:sixpackburner/presentations/ui/scan_code/scan_code_view.dart';
+import 'package:sixpackburner/presentations/ui/welcome/widgets/carrusel_welcome.dart';
+import 'package:sixpackburner/presentations/ui/widgets/splash_page.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -160,30 +160,29 @@ class _InitialAppState extends State<InitialApp> {
     return BlocListener<AuthenticationCubit, AuthenticationState>(
         listenWhen: (previous, current) => previous.status != current.status,
         listener: (context, state) {
-          if (state.status == StatusAuthentication.hay_token) {
+          // print("ingresa a la app..."+state.status.toString());
+            if (state.status == StatusAuthentication.hay_token) {
           } else if (state.status == StatusAuthentication.scan_code) {
             //context.read<NutritionalPlanCubit>().init();
             Navigator.pushNamed(context, ScanCodeView.routeName);
           } else if (state.status == StatusAuthentication.autenticado) {
             //Navigator.pushNamed(context, ScanCodeView.routeName);
-            Navigator.pushNamed(context, HomeView.routeName);
+            Navigator.pushNamedAndRemoveUntil(context, HomeView.routeName, (r) => false);
             //context.read<NutritionalPlanCubit>().init();
             //Navigator.pushNamed(context, HomeView.routeName);
-          } else if (state.status ==
-              StatusAuthentication
-                  .authenticated_without_qr_code_not_activated) {
+          } else if (state.status == StatusAuthentication.authenticated_without_qr_code_not_activated) {
             Navigator.pushNamed(context, ScanCodeView.routeName);
             //context.read<NutritionalPlanCubit>().init();
             //Navigator.pushNamed(context, HomeView.routeName);
           } else if (state.status == StatusAuthentication.no_autenticado) {
             Navigator.pushNamed(context, LoginView.routeName);
           } else if (state.status == StatusAuthentication.logout) {
-            Navigator.pushNamed(context, WelcomeView.routeName);
+               Navigator.pushNamed(context, WelcomeView.routeName);
           } else if (state.status == StatusAuthentication.poll) {
             Navigator.pushNamed(context, PollView.routeName);
           }
         },
-        child: SplashPage() //WelcomeView(),
+        child: SplashPage(),
         );
   }
 }
@@ -202,7 +201,6 @@ class _WelcomeViewState extends State<WelcomeView> {
   @override
   void initState() {
     super.initState();
-
     // Pointing the video controller to our local asset.
     _controller = VideoPlayerController.asset("assets/video/video.mp4")
       ..initialize().then((_) {
@@ -243,7 +241,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                     ),
                     Image.asset(
                       'assets/images/logo_reto.png',
-                      width: 325,
+                      width: 250,
                     ),
                   ],
                 ),
@@ -274,6 +272,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                             onPressed: () {
                               Navigator.pushNamed(
                                   context, RegisterView.routeName);
+                                  //  Navigator.pushNamedAndRemoveUntil(context, RegisterView.routeName, (r) => false);
                               _controller.pause();
                             },
                             child: Text(
@@ -290,6 +289,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                         child: TextButton(
                             onPressed: () {
                               Navigator.pushNamed(context, LoginView.routeName);
+                                    //  Navigator.pushNamedAndRemoveUntil(context,  LoginView.routeName, (r) => false);
                               _controller.pause();
                             },
                             child: Text("INICIAR SESION",

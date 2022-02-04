@@ -1,8 +1,8 @@
-import 'package:burnet_stack/data/data.dart';
-import 'package:burnet_stack/data/entities/response/register_entity_response.dart';
-import 'package:burnet_stack/device/device.dart';
-import 'package:burnet_stack/domain/exceptions/domain_exception.dart';
-import 'package:burnet_stack/domain/models/response_model.dart';
+import 'package:sixpackburner/data/data.dart';
+import 'package:sixpackburner/data/entities/response/register_entity_response.dart';
+import 'package:sixpackburner/device/device.dart';
+import 'package:sixpackburner/domain/exceptions/domain_exception.dart';
+import 'package:sixpackburner/domain/models/response_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -85,6 +85,7 @@ class AuthenticationRepository {
       {required String correo,
       required String password,
       required String ciudad,
+      required String so,
       required String numeroCelular,
       required String nombre}) async {
 
@@ -96,6 +97,7 @@ class AuthenticationRepository {
             ciudad: ciudad,
             usuario: nombre,
             correo: correo,
+            so:so,
             numeroCelular: int.parse(numeroCelular),
             pass: password,
             idToken: ""));
@@ -132,6 +134,8 @@ class AuthenticationRepository {
 
   Future<Either<DomainException, ResponseModel>> updateToken(
       String token) async {
+
+    
     String? dataUser = await PersitentDevice().getUser();
 
     UserPlusModel user = UserPlusModel.fromRawJson(dataUser!);

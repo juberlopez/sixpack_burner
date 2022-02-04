@@ -1,5 +1,5 @@
-import 'package:burnet_stack/domain/domain.dart';
-import 'package:burnet_stack/presentations/ui/theme/app_theme.dart';
+import 'package:sixpackburner/domain/domain.dart';
+import 'package:sixpackburner/presentations/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class NotificatioView extends StatefulWidget {

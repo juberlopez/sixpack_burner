@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 
-import 'package:burnet_stack/data/entities/response/login_entity_reponse.dart';
+import 'package:sixpackburner/data/entities/response/login_entity_reponse.dart';
 
 class PollEntityResponse {
     PollEntityResponse({

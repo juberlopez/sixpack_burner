@@ -1,5 +1,5 @@
 
-import 'package:burnet_stack/data/entities/entities.dart';
+import 'package:sixpackburner/data/entities/entities.dart';
 
 class ResponseEntity {
    

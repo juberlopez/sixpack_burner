@@ -1,4 +1,4 @@
-import 'package:burnet_stack/presentations/ui/poll/poll_cubit/poll_cubit.dart';
+import 'package:sixpackburner/presentations/ui/poll/poll_cubit/poll_cubit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

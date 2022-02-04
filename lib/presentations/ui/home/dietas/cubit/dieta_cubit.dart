@@ -3,9 +3,9 @@ import 'dart:ffi';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:burnet_stack/device/device.dart';
-import 'package:burnet_stack/domain/domain.dart';
-import 'package:burnet_stack/presentations/app.dart';
+import 'package:sixpackburner/device/device.dart';
+import 'package:sixpackburner/domain/domain.dart';
+import 'package:sixpackburner/presentations/app.dart';
 import 'package:equatable/equatable.dart';
 import "package:collection/collection.dart";
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -17,6 +17,7 @@ import 'package:timezone/timezone.dart' as tz;
 part 'dieta_state.dart';
 
 class DietaCubit extends Cubit<DietaState> {
+  int? indexmenu=0;
   DietaCubit()
       : super(DietaState(
             listaDietas: [],
@@ -26,25 +27,26 @@ class DietaCubit extends Cubit<DietaState> {
 
   Future<void> init() async {
     emit(state.copyWith(status: StatusDieta.loading));
+   this.indexmenu= await PersitentDevice().getMenu();
     String? data = await PersitentDevice().getDietas();
     double calorias = 0;
     double carbohidratos = 0;
     double grasas = 0;
     double proteinas = 0;
-    int menu = 1;
+    int menu = indexmenu!;
     int index = 0;
-
-    print(data);
+ print("index stars $this.indexmenu");
+    // print(data);
     JsonDietasModel jsonDietasModel = JsonDietasModel.fromRawJson(data!);
 
-    print("object");
-    jsonDietasModel.dietas![0].alimentos!.sort((a, b) {
+   
+    jsonDietasModel.dietas![menu].alimentos!.sort((a, b) {
       return (a.hora! - b.hora!);
     });
 
-    menu = jsonDietasModel.dietas![0].menu!;
-
-    jsonDietasModel.dietas![0].alimentos!.forEach((element) {
+    // menu = jsonDietasModel.dietas![0].menu!;
+// menu= indexmenu!;
+    jsonDietasModel.dietas![menu].alimentos!.forEach((element) {
       calorias = calorias + element.calorias!;
       carbohidratos = carbohidratos + element.chos!;
       grasas = grasas + element.grasa!;
@@ -52,18 +54,18 @@ class DietaCubit extends Cubit<DietaState> {
 
       index = index + 1;
 
-      if (index == jsonDietasModel.dietas![0].alimentos!.length) {
+      if (index == jsonDietasModel.dietas![menu].alimentos!.length) {
         emit(
           state.copyWith(
-              menu: menu,
+              menu: menu+1,
               totalCalorias: calorias,
               totalCarbohidratos: carbohidratos,
               totalGrasas: grasas,
               totalProteinas: proteinas,
               listaDietas: jsonDietasModel.dietas,
               info: jsonDietasModel.info,
-              dieta: jsonDietasModel.dietas![0],
-              comidas: jsonDietasModel.dietas![0].alimentos!
+              dieta: jsonDietasModel.dietas![menu],
+              comidas: jsonDietasModel.dietas![menu].alimentos!
                   .map((e) => e)
                   .groupListsBy((element) => element.comida)),
         );
@@ -86,7 +88,10 @@ class DietaCubit extends Cubit<DietaState> {
     double carbohidratos = 0;
     double grasas = 0;
     double proteinas = 0;
-    int menu = 0;
+
+    int menu = (indexmenu) ?? 0;
+// menu=menu+1;
+    print("menú opciones: $menu");
 
     if (state.listaDietas.length != state.menu) {
       state.listaDietas[state.menu].alimentos!.sort((a, b) {
@@ -113,7 +118,6 @@ class DietaCubit extends Cubit<DietaState> {
       });
       menu = 1;
     }
-
     emit(
       state.copyWith(
           menu: menu,
@@ -126,6 +130,7 @@ class DietaCubit extends Cubit<DietaState> {
               .map((e) => e)
               .groupListsBy((element) => element.comida)),
     );
+    await PersitentDevice().setMenu(menu);
   }
 
   Future<bool> mostrarPupop() async {
@@ -216,21 +221,21 @@ return Array.from(map);
       await flutterLocalNotificationsPlugin.cancelAll();
       var comidas = {
         'AL DESPERTARSE':
-            "https://retoburnerstack.megaplexstars.com/images/comidas/despertar.jpg",
+            "https://sixpackburner.megaplexstars.com/images/comidas/despertar.jpg",
         "DESAYUNO":
-            "https://retoburnerstack.megaplexstars.com/images/comidas/desayuno.jpg",
+            "https://sixpackburner.megaplexstars.com/images/comidas/desayuno.jpg",
         'MEDIA MAÑANA':
-            'https://retoburnerstack.megaplexstars.com/images/comidas/mediodia.jpg',
+            'https://sixpackburner.megaplexstars.com/images/comidas/mediodia.jpg',
         "ALMUERZO":
-            'https://retoburnerstack.megaplexstars.com/images/comidas/almuerzo.jpg',
+            'https://sixpackburner.megaplexstars.com/images/comidas/almuerzo.jpg',
         'MEDIA TARDE':
-            'https://retoburnerstack.megaplexstars.com/images/comidas/mediatarde.jpg',
+            'https://sixpackburner.megaplexstars.com/images/comidas/mediatarde.jpg',
         "MERIENDA":
-            'https://retoburnerstack.megaplexstars.com/images/comidas/comidas_media.jpg',
+            'https://sixpackburner.megaplexstars.com/images/comidas/comidas_media.jpg',
         "CENA":
-            'https://retoburnerstack.megaplexstars.com/images/comidas/cena.jpg',
+            'https://sixpackburner.megaplexstars.com/images/comidas/cena.jpg',
         "POST ENTRENO":
-            'https://retoburnerstack.megaplexstars.com/images/comidas/cena.jpg',
+            'https://sixpackburner.megaplexstars.com/images/comidas/cena.jpg',
       };
 
       /*await flutterLocalNotificationsPlugin.periodicallyShow(

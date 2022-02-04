@@ -1,7 +1,7 @@
-import 'package:burnet_stack/data/api/api.dart';
+import 'package:sixpackburner/data/api/api.dart';
 import 'package:dartz/dartz.dart';
-import 'package:burnet_stack/data/exceptions/data_exception.dart';
-import 'package:burnet_stack/data/entities/response/entity_response.dart';
+import 'package:sixpackburner/data/exceptions/data_exception.dart';
+import 'package:sixpackburner/data/entities/response/entity_response.dart';
 import '../../data.dart';
 import '../general_data_source.dart';
 
@@ -47,7 +47,7 @@ class GeneralRemote implements GeneralDataSource {
 
     try {
       dataResponse = await _client.post("control/", dataReques);
-
+print("respuesta $dataResponse");
       return Right(EntityResponse(
         data: MyProgressEntityResponse.fromJson(dataResponse["controles"]),
       ));

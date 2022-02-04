@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:burnet_stack/domain/models/user_model.dart';
+import 'package:sixpackburner/domain/models/user_model.dart';
 
 class ReportModel {
     ReportModel({

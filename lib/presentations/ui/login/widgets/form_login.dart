@@ -1,7 +1,7 @@
-import 'package:burnet_stack/presentations/cubits/authentication_cubit/authentication_cubit.dart';
-import 'package:burnet_stack/presentations/services/screen_messages_service.dart';
-import 'package:burnet_stack/presentations/ui/widgets/buttons/app_button.dart';
-import 'package:burnet_stack/presentations/ui/widgets/fields/app_field.dart';
+import 'package:sixpackburner/presentations/cubits/authentication_cubit/authentication_cubit.dart';
+import 'package:sixpackburner/presentations/services/screen_messages_service.dart';
+import 'package:sixpackburner/presentations/ui/widgets/buttons/app_button.dart';
+import 'package:sixpackburner/presentations/ui/widgets/fields/app_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -114,7 +114,7 @@ class _FormLoginState extends State<FormLogin> {
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () async {
                                         await launch(
-                                            'https://retoburnerstack.megaplexstars.com/#policy');
+                                            'https://burnersixpack.megaplexstars.com/#policy');
                                         // open desired screen
                                       }),
                                 TextSpan(
@@ -134,9 +134,8 @@ class _FormLoginState extends State<FormLogin> {
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () async {
                                         await launch(
-                                            'https://retoburnerstack.megaplexstars.com/#conditions');
-                                        print("data"); // open desired screen
-                                      }),
+                                            'https://burnersixpack.megaplexstars.com/#conditions');
+                                        }),
                                 TextSpan(
                                     text: ' de Megaplex Stars.',
                                     style: TextStyle(
@@ -161,7 +160,7 @@ class _FormLoginState extends State<FormLogin> {
                                   BlocProvider.of<AuthenticationCubit>(context)
                                       .signInwithEmail(
                                           form.control("correo").value,
-                                          form.control("contrasena").value);
+                                          form.control("contrasena").value, context);
                                 } else {
                                   ScreenMessagesService()
                                       .toast("Verificar formulario");

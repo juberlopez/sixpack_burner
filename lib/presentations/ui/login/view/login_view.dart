@@ -1,8 +1,8 @@
-import 'package:burnet_stack/presentations/cubits/authentication_cubit/authentication_cubit.dart';
-import 'package:burnet_stack/presentations/ui/login/widgets/form_login.dart';
-import 'package:burnet_stack/presentations/ui/register/view/register_view.dart';
-import 'package:burnet_stack/presentations/ui/theme/app_theme.dart';
-import 'package:burnet_stack/presentations/ui/widgets/loading_indicator.dart';
+import 'package:sixpackburner/presentations/cubits/authentication_cubit/authentication_cubit.dart';
+import 'package:sixpackburner/presentations/ui/login/widgets/form_login.dart';
+import 'package:sixpackburner/presentations/ui/register/view/register_view.dart';
+import 'package:sixpackburner/presentations/ui/theme/app_theme.dart';
+import 'package:sixpackburner/presentations/ui/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,9 +47,9 @@ class _LoginViewState extends State<LoginView> {
                     height: 20,
                   ),
                   Image.asset(
-                    'assets/splash/logo.png',
+                    'assets/splash/logomegaplexstars.png',
                     //width: 325,
-                    height: 51,
+                    height: 150,
                   ),
                   FormLogin(),
                   SizedBox(
@@ -57,6 +57,7 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   Container(
                     alignment: Alignment.center,
+                         padding: EdgeInsets.only(bottom: 40.0),
                     child: Center(
                         child: Row(
                       children: [
@@ -76,8 +77,7 @@ class _LoginViewState extends State<LoginView> {
                         ),
                         TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(
-                                  context, RegisterView.routeName);
+                              Navigator.pushNamed(context, RegisterView.routeName);
                             },
                             child: Text(
                               'Únete a nosotros',

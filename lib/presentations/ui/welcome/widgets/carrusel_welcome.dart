@@ -1,4 +1,4 @@
-import 'package:burnet_stack/presentations/ui/welcome/welcome_cubit/welcome_cubit.dart';
+import 'package:sixpackburner/presentations/ui/welcome/welcome_cubit/welcome_cubit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -121,6 +121,7 @@ class _CarrucelState extends State<Carrucel> {
                     items: widget.contenidoItems,
                     options: CarouselOptions(
                         autoPlay: true,
+                           autoPlayInterval: Duration(seconds: 10),
                         enlargeCenterPage: true,
                         aspectRatio: 2.0,
                         onPageChanged: (index, reason) {

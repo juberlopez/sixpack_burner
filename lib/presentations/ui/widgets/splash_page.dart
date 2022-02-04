@@ -1,5 +1,5 @@
-import 'package:burnet_stack/presentations/cubits/authentication_cubit/authentication_cubit.dart';
-import 'package:burnet_stack/presentations/ui/welcome/view/welcome_view.dart';
+import 'package:sixpackburner/presentations/cubits/authentication_cubit/authentication_cubit.dart';
+import 'package:sixpackburner/presentations/ui/welcome/view/welcome_view.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,6 +47,7 @@ class _SplashPageState extends State<SplashPage> {
         // TODO: implement listener
       },
       child: Scaffold(
+            backgroundColor: Colors.blueAccent,
         body: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +63,7 @@ class _SplashPageState extends State<SplashPage> {
               ),
               // Spacer(),
               CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.orange.shade200),
               ),
             ],
           ),

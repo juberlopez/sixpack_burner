@@ -1,10 +1,10 @@
-import 'package:burnet_stack/domain/domain.dart';
-import 'package:burnet_stack/presentations/ui/home/mi_progreso/cubit/mi_progreso_cubit.dart';
-import 'package:burnet_stack/presentations/ui/home/mi_progreso/widgets/carrucel_control.dart';
-import 'package:burnet_stack/presentations/ui/home/mi_progreso/widgets/carrusel_progreso.dart';
-import 'package:burnet_stack/presentations/ui/home/mi_progreso/widgets/modal_form_control.dart';
-import 'package:burnet_stack/presentations/ui/theme/app_theme.dart';
-import 'package:burnet_stack/presentations/ui/widgets/loading_indicator.dart';
+import 'package:sixpackburner/domain/domain.dart';
+import 'package:sixpackburner/presentations/ui/home/mi_progreso/cubit/mi_progreso_cubit.dart';
+import 'package:sixpackburner/presentations/ui/home/mi_progreso/widgets/carrucel_control.dart';
+import 'package:sixpackburner/presentations/ui/home/mi_progreso/widgets/carrusel_progreso.dart';
+import 'package:sixpackburner/presentations/ui/home/mi_progreso/widgets/modal_form_control.dart';
+import 'package:sixpackburner/presentations/ui/theme/app_theme.dart';
+import 'package:sixpackburner/presentations/ui/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -44,12 +44,12 @@ class _MiProgresoViewState extends State<MiProgresoView> {
                               0.0,
                               1,
                             ], colors: AppTheme.secondarylinearGradiant),
-                            borderRadius: BorderRadius.circular(8.0)),
+                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Center(
                               child: Text(
-                            "¡Por primera vez podrás ganar premios por lograr el cuerpo que siempre has soñado!",
+                            "Registra tu progreso y compara tus resultados",
                             textAlign: TextAlign.center,
                             style: TextStyle(color: Colors.white),
                           )),
@@ -58,13 +58,20 @@ class _MiProgresoViewState extends State<MiProgresoView> {
                     )
                   ],
                 ),
-                CarouselProgreso(
-                  lista: [
-                    'assets/images/slider1.jpg',
-                    'assets/images/slider2.jpg',
-                    'assets/images/slider3.jpg',
-                  ],
-                ),
+                // CarouselProgreso(
+                //   lista: [
+                //     'assets/images/slider1.jpg',
+                //     'assets/images/slider2.jpg',
+                //     'assets/images/slider3.jpg',
+                //   ],
+                // ),
+                FadeInImage(
+height: 250.0,
+fit: BoxFit.cover,
+fadeInDuration: Duration( milliseconds: 200 ),
+placeholder: AssetImage('assets/images/predeterminada.jpg'), image: AssetImage('assets/images/bannerfotos.jpg')),
+// Image(image: AssetImage('assets/images/bannerfotos.jpg')),
+      SizedBox(height: 10),
                 Row(
                   children: [
                     Expanded(
@@ -139,7 +146,7 @@ class _MiProgresoViewState extends State<MiProgresoView> {
                                     height: 20,
                                   ),
                                   Text(
-                                      "No es obligatorio tomarse las fotos, son para tu motivación y para participar en los premios.",
+                                      "No es obligatorio tomarse las fotos, son para tu motivación.",
                                       style: TextStyle(
                                         fontSize: 12,
                                         fontFamily: 'Quicksand',
@@ -152,7 +159,8 @@ class _MiProgresoViewState extends State<MiProgresoView> {
                             )),
                           );
                         },
-                        child: Row(
+                        child: Container(
+child: Row(
                           children: [
                             Text(
                               "Informacion",
@@ -163,16 +171,22 @@ class _MiProgresoViewState extends State<MiProgresoView> {
                               color: Colors.blue,
                             )
                           ],
-                        ))
+                        ),
+height: 40,
+padding:  EdgeInsets.only(right:5),
+                        )
+                        )
                   ],
                 ),
+                      SizedBox(height: 10),
                 Text("MI PROCESO"),
-                
+           SizedBox(height: 20),
                    SingleChildScrollView(
                     child: BlocBuilder<MiProgresoCubit, MiProgresoState>(
                       buildWhen: (previous, current) =>
                           previous.listaProgresos != current.listaProgresos || previous.sizeListaprogreso != current.sizeListaprogreso,
                       builder: (context, state) {
+                        print("estado: $state");
                         return Padding(
                           padding: const EdgeInsets.only(top: 1),
                           child: (state.listaProgresos.isNotEmpty)
@@ -183,7 +197,7 @@ class _MiProgresoViewState extends State<MiProgresoView> {
                                   child: Padding(
                                   padding: const EdgeInsets.all(40.0),
                                   child: Text(
-                                    "Registra tu primer foto para iniciar con el reto. Se debe registrar 4 fotos en periodos de 10 dias. Te deseamos mucha suerte,recuerda, con disciplina y constancia podras cumplir cualquier meta.",
+                                    "Registra tu primer foto para que compares los cambios de tu progreso.",
                                     style: TextStyle(color: Colors.grey),
                                     textAlign: TextAlign.left,
                                   ),
@@ -196,26 +210,26 @@ class _MiProgresoViewState extends State<MiProgresoView> {
                 ModalFormControl(),
                 Row(
                 children: [
-                  Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 50,
-                child: OutlinedButton(
-                  child: Text('Reglas del Concurso'),
-                  style: OutlinedButton.styleFrom(
-                    primary: Colors.blue,
-                    backgroundColor: Colors.white,
-                    side: BorderSide(color: Colors.blue, width: 1),
-                  ),
-                  onPressed: () async {
-                    await launch(
-                              'https://reto30.fit/reglas');
-                  },
-                ),
-              ),
-            ),
-                  ),
+            //       Expanded(
+            // child: Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: Container(
+            //     height: 50,
+            //     child: OutlinedButton(
+            //       child: Text('Reglas del Concurso'),
+            //       style: OutlinedButton.styleFrom(
+            //         primary: Colors.blue,
+            //         backgroundColor: Colors.white,
+            //         side: BorderSide(color: Colors.blue, width: 1),
+            //       ),
+            //       onPressed: () async {
+            //         await launch(
+            //                   'https://reto30.fit/reglas');
+            //       },
+            //     ),
+            //   ),
+            // ),
+            //       ),
                 ],
               )
               ],

@@ -1,7 +1,7 @@
-import 'package:burnet_stack/data/data.dart';
-import 'package:burnet_stack/device/device.dart';
-import 'package:burnet_stack/domain/exceptions/domain_exception.dart';
-import 'package:burnet_stack/domain/models/response_model.dart';
+import 'package:sixpackburner/data/data.dart';
+import 'package:sixpackburner/device/device.dart';
+import 'package:sixpackburner/domain/exceptions/domain_exception.dart';
+import 'package:sixpackburner/domain/models/response_model.dart';
 import 'package:dartz/dartz.dart';
 
 import '../domain.dart';
@@ -89,7 +89,6 @@ class GeneralRepository {
 
   Future<Either<DomainException, ResponseModel>> deleteProgresos(int id) async {
     final response = await _remoteDataSource.deleteProgresos(id);
-
     return response.fold(
         (dataExceptiond) => Left(DomainException(
             error: DomainError.Unknown,
@@ -112,6 +111,7 @@ class GeneralRepository {
 
   Future<Either<DomainException, ResponseModel>> addDieta(
       ReportModel reportModel) async {
+        // print("datos enviandos..."+ reportModel.toJson().toString());
     final response = await _remoteDataSource.addDieta(reportModel.toJson());
 
     return response.fold(

@@ -1,10 +1,10 @@
-import 'package:burnet_stack/device/device.dart';
-import 'package:burnet_stack/domain/domain.dart';
-import 'package:burnet_stack/presentations/cubits/authentication_cubit/authentication_cubit.dart';
-import 'package:burnet_stack/presentations/ui/home/view/home_view.dart';
-import 'package:burnet_stack/presentations/ui/poll/poll_cubit/poll_cubit.dart';
-import 'package:burnet_stack/presentations/ui/widgets/buttons/app_button.dart';
-import 'package:burnet_stack/presentations/ui/widgets/loading_indicator.dart';
+import 'package:sixpackburner/device/device.dart';
+import 'package:sixpackburner/domain/domain.dart';
+import 'package:sixpackburner/presentations/cubits/authentication_cubit/authentication_cubit.dart';
+import 'package:sixpackburner/presentations/ui/home/view/home_view.dart';
+import 'package:sixpackburner/presentations/ui/poll/poll_cubit/poll_cubit.dart';
+import 'package:sixpackburner/presentations/ui/widgets/buttons/app_button.dart';
+import 'package:sixpackburner/presentations/ui/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiver/iterables.dart';

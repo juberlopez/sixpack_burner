@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:burnet_stack/device/repositories/device_repository.dart';
-import 'package:burnet_stack/domain/domain.dart';
-import 'package:burnet_stack/presentations/services/screen_messages_service.dart';
+import 'package:sixpackburner/device/repositories/device_repository.dart';
+import 'package:sixpackburner/domain/domain.dart';
+import 'package:sixpackburner/presentations/services/screen_messages_service.dart';
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -35,9 +35,7 @@ class MiProgresoCubit extends Cubit<MiProgresoState> {
   Future<void> imageChanged(ImageSource source) async {
     try {
       String img = (await deviceRepository.getImagenDevice(source));
-      emit(state.copyWith(
-        imagen: img,
-      ));
+      emit(state.copyWith( imagen: img, ));
     } on DomainException catch (e) {
       //print("error");
       ScreenMessagesService().toast(e.message.toString());
@@ -59,6 +57,7 @@ class MiProgresoCubit extends Cubit<MiProgresoState> {
         ScreenMessagesService().toast(e.message.toString());
       }, (response) {
         //ScreenMessages().toast("No existe Usuario");
+            
 List<MyProgressModel>? listaProgresos= response.data;
 
 List<MyProgressModel>? listaProgresosPlus= state.listaProgresos;

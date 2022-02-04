@@ -1,0 +1,22 @@
+cambiar logos:ok
+quitar popup de sorteos:ok
+añadir buscador en ciudades:ok
+permitir registrar qr de otros productos:ok
+poner nuevos productos para la dieta: ok
+correcciones ortográficas: ok
+quitar pantalla del código del dependiente:ok
+revisar token del celular: ok
+revisar hora y tiempo de entreno: ok
+poner los productos nuevos: ok
+Subscripción a grupo y actualización de token en login con qr full : ok
+Poner buscador en ciudades: ok
+modificar el id del control: ok
+cambiar las fotos del slider de mi progreso:ok
+arreglar el número del control: ok
+Guardar el menú elegido:ok 
+identificar si es iphone o android: ok
+aumentar área táctil en el botón de cambiar menú: ok
+
+activar notificaciones locales android
+optimizar módulo de adjuntar la foto 
+actualizar link a páginas

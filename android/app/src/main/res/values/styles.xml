@@ -1,10 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- Theme applied to the Android Window while the process is starting when the OS's Dark Mode setting is off -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- theme to use FOR launch screen-->
+    <style name="LaunchScreenThemeBase" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="toolbarStyle">@style/NativeScriptToolbarStyle</item>
+
+        <item name="colorPrimary">@color/ns_primary</item>
+        <item name="colorPrimaryDark">@color/ns_primaryDark</item>
+        <item name="colorAccent">@color/ns_accent</item>
+
+        <item name="android:windowBackground" >@drawable/splashscreen</item>
+        
+        <item name="android:windowActionBarOverlay">true</item>  
+        <item name="android:windowTranslucentStatus">true</item>
+
+    </style>
+
+    <style name="LaunchScreenTheme" parent="LaunchScreenThemeBase">
+    </style>
+ 
+    <!-- theme to use AFTER launch screen is loaded-->
+    <style name="AppThemeBase" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="toolbarStyle">@style/NativeScriptToolbarStyle</item>
+
+        <item name="colorPrimary">@color/ns_primary</item>
+        <item name="colorPrimaryDark">@color/ns_primaryDark</item>
+        <item name="colorAccent">@color/ns_accent</item>
+
+    </style>
+
+    <style name="AppTheme" parent="AppThemeBase">
+    </style>
+
+    <!-- theme for action-bar -->
+    <style name="NativeScriptToolbarStyleBase" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/ns_primary</item>
+        <item name="theme">@style/ThemeOverlay.AppCompat.ActionBar</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat</item>
+
+    </style>
+
+    <style name="NativeScriptToolbarStyle" parent="NativeScriptToolbarStyleBase">
+    </style>
+
+
+
     <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <!-- Show a splash screen on the activity. Automatically removed when
              Flutter draws its first frame -->
-        <item name="android:windowBackground">@drawable/launch_background</item>
+        <item name="android:windowBackground">@drawable/splashscreen</item>
         <item name="android:windowFullscreen">false</item>
     </style>
     <!-- Theme applied to the Android Window as soon as the process has started.
@@ -16,4 +60,10 @@
     <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <item name="android:windowBackground">?android:colorBackground</item>
     </style>
-</resources>
+
+
+
+</resources> 
+
+
+

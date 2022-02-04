@@ -1,17 +1,17 @@
-import 'package:burnet_stack/presentations/cubits/authentication_cubit/authentication_cubit.dart';
-import 'package:burnet_stack/presentations/services/screen_messages_service.dart';
-import 'package:burnet_stack/presentations/ui/theme/app_theme.dart';
-import 'package:burnet_stack/presentations/ui/widgets/buttons/app_button.dart';
-import 'package:burnet_stack/presentations/ui/widgets/fields/app_field.dart';
+import 'package:sixpackburner/presentations/cubits/authentication_cubit/authentication_cubit.dart';
+import 'package:sixpackburner/presentations/services/screen_messages_service.dart';
+import 'package:sixpackburner/presentations/ui/theme/app_theme.dart';
+import 'package:sixpackburner/presentations/ui/widgets/buttons/app_button.dart';
+import 'package:sixpackburner/presentations/ui/widgets/fields/app_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:open_mail_app/open_mail_app.dart';
 import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
+import 'dart:io' show Platform;
 import 'package:url_launcher/url_launcher.dart';
-
+import 'dart:ffi';
 class FormRegister extends StatefulWidget {
   const FormRegister({Key? key}) : super(key: key);
 
@@ -24,12 +24,23 @@ class _FormRegisterState extends State<FormRegister> {
   late FocusNode _focusNode;
   late String ciudad;
   bool terminos = false;
-
+ String so="IOS";
   @override
   void initState() {
     super.initState();
     _focusNode = FocusNode();
-    ciudad = "Cali";
+    ciudad = "BOGOTA (CUN)";
+
+if (Platform.isAndroid) {
+  // Android-specific code
+this.so="ANDROID";
+} else if (Platform.isIOS) {
+  // iOS-specific code
+this.so="IOS";
+}
+
+
+
   }
 
   @override
@@ -81,7 +92,47 @@ class _FormRegisterState extends State<FormRegister> {
                                 labelText: "Nombre Completo",
                                 onTap: () => {},
                               ),
-                              AppField(
+                                        SizedBox(
+                                height: 10,
+                              ),
+                                DropdownSearch<String>(
+                                  showSearchBox: true,
+                                dropdownSearchDecoration: InputDecoration(
+                                    filled: true,
+                                  contentPadding:EdgeInsets.fromLTRB(12, 12, 0, 0),
+                                 border: OutlineInputBorder(borderSide: BorderSide(color: AppTheme.primaryColor)), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: AppTheme.tertiaryColor)),
+                                  fillColor: Colors.white,
+                                  labelText: "Selecciona la ciudad",
+                                   focusedBorder: new OutlineInputBorder(borderSide: new BorderSide(color: Colors.blue)), 
+                                   labelStyle: TextStyle(color: AppTheme.quaternaryColor),
+                                  ),
+                                mode: Mode.BOTTOM_SHEET,
+                                showSelectedItem: true,
+                                  items: listaCiudades,
+                                label: "Ciudad",
+                                hint: "Ciudad",
+                                onChanged: (data) {
+                                  setState(() {
+                                    ciudad = data.toString();
+                                         print(ciudad);
+                                  });
+                                },
+                                onSaved: (data) {
+                                  setState(() {
+                                    ciudad = data.toString();
+                                    print(ciudad);
+                                  });
+                                },
+                                selectedItem: "BOGOTA (CUN)",
+                                validator: (String? item) {
+                                  if (item == null)
+                                    return "Required field";
+                                  else
+                                    return null;
+                                },
+                              ),  
+                                 SizedBox(height: 10,),
+                                   AppField(
                                 obscureText: true,
                                 keyboardType: TextInputType.text,
                                 form: form,
@@ -101,67 +152,24 @@ class _FormRegisterState extends State<FormRegister> {
                                   'mustMatch': 'Contraseña no coincide'
                                 },
                               ),
-                              AppField(
+                            
+                                 
+                                  AppField(
                                 keyboardType: TextInputType.phone,
                                 form: form,
                                 formControlName: "numero_celular",
                                 labelText: "Numero celular",
                                 onTap: () => {},
                               ),
-                              AppField(
+                          
+                            AppField(
                                 keyboardType: TextInputType.emailAddress,
                                 form: form,
                                 formControlName: "correo",
                                 labelText: "Correo Electrónico",
                                 onTap: () => {},
                               ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              DropdownSearch<String>(
-                                dropdownSearchDecoration: InputDecoration(
-                                  contentPadding:
-                                      EdgeInsets.fromLTRB(12, 12, 0, 0),
-                                  border: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: AppTheme.primaryColor)),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: AppTheme.tertiaryColor)),
-                                  fillColor: AppTheme.secondaryColor,
-                                  labelText: "Fecha de nacimiento",
-                                  focusedBorder: new OutlineInputBorder(
-                                      borderSide:
-                                          new BorderSide(color: Colors.blue)),
-                                  labelStyle: TextStyle(
-                                      color: AppTheme.quaternaryColor),
-                                ),
-                                mode: Mode.MENU,
-                                showSelectedItem: true,
-                                items: listaCiudades,
-                                label: "Ciudad",
-                                hint: "Ciudad",
-                                onChanged: (data) {
-                                  setState(() {
-                                    ciudad = data.toString();
-                                  });
-                                },
-                                onSaved: (data) {
-                                  setState(() {
-                                    ciudad = data.toString();
-                                  });
-                                },
-                                selectedItem: "Cali",
-                                validator: (String? item) {
-                                  if (item == null)
-                                    return "Required field";
-                                  else
-                                    return null;
-                                },
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
+                           
                               /*ReactiveDatePicker<DateTime>(
                                 formControlName: 'date',
                                 firstDate: DateTime(1950),
@@ -258,7 +266,7 @@ class _FormRegisterState extends State<FormRegister> {
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () async {
                                               await launch(
-                                                  'https://retoburnerstack.megaplexstars.com/#policy');
+                                                  'https://sixpackburner.megaplexstars.com/#policy');
                                               // open desired screen
                                             }),
                                       TextSpan(
@@ -278,7 +286,7 @@ class _FormRegisterState extends State<FormRegister> {
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () async {
                                               await launch(
-                                                  'https://retoburnerstack.megaplexstars.com/#conditions');
+                                                  'https://sixpackburner.megaplexstars.com/#conditions');
                                               print("data"); // open desired screen
                                             }),
                                       TextSpan(
@@ -296,21 +304,21 @@ class _FormRegisterState extends State<FormRegister> {
                     SizedBox(
                       height: 10,
                     ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Center(
-                        child: Text(
-                          "Consigue una recompensa especial de Megaplex Stars cada año por tu cumpleaños",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 12,
-                            //fontWeight: FontWeight.w300,
-                            fontFamily: 'Quicksand',
-                            color: Color(0xffA4A4A4),
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Container(
+                    //   alignment: Alignment.center,
+                    //   child: Center(
+                    //     child: Text(
+                    //       "Consigue una recompensa especial de Megaplex Stars cada año por tu cumpleaños",
+                    //       textAlign: TextAlign.center,
+                    //       style: TextStyle(
+                    //         fontSize: 12,
+                    //         //fontWeight: FontWeight.w300,
+                    //         fontFamily: 'Quicksand',
+                    //         color: Color(0xffA4A4A4),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     SizedBox(
                       height: 20,
                     ),
@@ -325,7 +333,7 @@ class _FormRegisterState extends State<FormRegister> {
                                 if(terminos){
                                   if (form.valid && ciudad.isNotEmpty) {
                                   BlocProvider.of<AuthenticationCubit>(context)
-                                      .registerUser(form, ciudad);
+                                      .registerUser(form, ciudad, so);
                                 } else {
                                   ScreenMessagesService()
                                       .toast("Verificar formulario");

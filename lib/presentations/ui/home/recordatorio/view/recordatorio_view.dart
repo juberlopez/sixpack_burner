@@ -1,9 +1,9 @@
-import 'package:burnet_stack/domain/domain.dart';
-import 'package:burnet_stack/presentations/ui/home/dietas/cubit/dieta_cubit.dart';
-import 'package:burnet_stack/presentations/ui/theme/app_theme.dart';
+import 'package:sixpackburner/domain/domain.dart';
+import 'package:sixpackburner/presentations/ui/home/dietas/cubit/dieta_cubit.dart';
+import 'package:sixpackburner/presentations/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.Dart';
+// import 'package:intl/intl.Dart';
 
 class RecordatorioView extends StatefulWidget {
   static final String routeName = 'recordatorio_View';
@@ -39,7 +39,7 @@ class _RecordatorioViewState extends State<RecordatorioView> {
                           0.0,
                           1,
                         ], colors: AppTheme.secondarylinearGradiant),
-                        borderRadius: BorderRadius.circular(8.0)),
+         ),
                     child: Stack(
                       children: [
                         Padding(

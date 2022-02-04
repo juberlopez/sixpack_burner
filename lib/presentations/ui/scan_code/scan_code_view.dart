@@ -1,6 +1,7 @@
-import 'package:burnet_stack/presentations/cubits/authentication_cubit/authentication_cubit.dart';
-import 'package:burnet_stack/presentations/ui/scan_code/form_code_view.dart';
-import 'package:burnet_stack/presentations/ui/widgets/loading_indicator.dart';
+import 'package:sixpackburner/presentations/cubits/authentication_cubit/authentication_cubit.dart';
+import 'package:sixpackburner/presentations/ui/poll/view/poll_view.dart';
+import 'package:sixpackburner/presentations/ui/scan_code/form_code_view.dart';
+import 'package:sixpackburner/presentations/ui/widgets/loading_indicator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,7 +37,8 @@ class _ScanCodeViewState extends State<ScanCodeView> {
               previous.statusQr != current.statusQr,
           listener: (context, state) {
             if (state.statusQr == StatusAuthentication.initial_save_code) {
-              Navigator.pushNamed(context, FormCodeView.routeName);
+              // Navigator.pushNamed(context, FormCodeView.routeName);
+                   Navigator.pushNamed(context, PollView.routeName);
             }
           },
           child: Stack(
@@ -72,14 +74,14 @@ class _ScanCodeViewState extends State<ScanCodeView> {
                       height: 10,
                     ),
                     Image.asset(
-                      'assets/images/icon_burnerstack_1.png',
-                      width: 48,
+                      'assets/images/logo_reto.png',
+                      width: 150,
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     Text(
-                        "Por favor escanea el código QR que aparece dentro del producto Burner Stack, para validar tu registro y empezar con el reto de 30 días",
+                        "Por favor escanea el código QR que aparece dentro del producto Burner Stack, para validar tu registro.",
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 14, color: Colors.white)),
                     SizedBox(
@@ -88,7 +90,7 @@ class _ScanCodeViewState extends State<ScanCodeView> {
                     GestureDetector(
                       child: Image.asset(
                         'assets/images/TAPA_SCAN.png',
-                        width: 224,
+                        width: 300,
                       ),
                       onTap: () {
                         showBottomModal(contextScan);

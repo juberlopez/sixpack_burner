@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:burnet_stack/presentations/cubits/authentication_cubit/authentication_cubit.dart';
-import 'package:burnet_stack/presentations/services/screen_messages_service.dart';
-import 'package:burnet_stack/presentations/ui/home/mi_progreso/cubit/mi_progreso_cubit.dart';
-import 'package:burnet_stack/presentations/ui/widgets/buttons/app_button.dart';
-import 'package:burnet_stack/presentations/ui/widgets/fields/app_field.dart';
-import 'package:burnet_stack/presentations/ui/widgets/type_image_source.dart';
+import 'package:sixpackburner/presentations/cubits/authentication_cubit/authentication_cubit.dart';
+import 'package:sixpackburner/presentations/services/screen_messages_service.dart';
+import 'package:sixpackburner/presentations/ui/home/mi_progreso/cubit/mi_progreso_cubit.dart';
+import 'package:sixpackburner/presentations/ui/widgets/buttons/app_button.dart';
+import 'package:sixpackburner/presentations/ui/widgets/fields/app_field.dart';
+import 'package:sixpackburner/presentations/ui/widgets/type_image_source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -52,7 +52,7 @@ class ModalFormControl extends StatelessWidget {
               });
           return AlertDialog(
             content: Container(
-              height: 600,
+              height: 500,
               child:  SingleChildScrollView(
                 child: Column(
                     children: [
@@ -80,7 +80,7 @@ class ModalFormControl extends StatelessWidget {
                               children: [
                                 Container(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(top: 10),
+                                    padding: const EdgeInsets.only(top: 0),
                                     child: Container(
                                       child: Column(
                                         children: [

@@ -1,7 +1,7 @@
-import 'package:burnet_stack/data/api/api.dart';
-import 'package:burnet_stack/data/entities/entities.dart';
-import 'package:burnet_stack/data/entities/response/register_entity_response.dart';
-import 'package:burnet_stack/data/exceptions/data_exception.dart';
+import 'package:sixpackburner/data/api/api.dart';
+import 'package:sixpackburner/data/entities/entities.dart';
+import 'package:sixpackburner/data/entities/response/register_entity_response.dart';
+import 'package:sixpackburner/data/exceptions/data_exception.dart';
 import 'package:dartz/dartz.dart';
 import '../autentication_data_source.dart';
 
@@ -50,7 +50,7 @@ class AutenticationRemote implements AutenticationDataSource {
 
     try {
       dataResponse =
-          await _client.post("newUser/", dataReques.toMap());
+          await _client.post("/v2/newUser/", dataReques.toMap());
 
       return Right(EntityResponse(
         data: RegisterEntityResponse.fromMap(dataResponse),
@@ -63,8 +63,10 @@ class AutenticationRemote implements AutenticationDataSource {
       @override
   Future<Either<DataException, EntityResponse>> updateToken(
       Map<String, dynamic> dataReques) async {
-    var dataResponse;
+        
+    print("token enviado"+ dataReques.toString());
 
+    var dataResponse;
     try {
       dataResponse = await _client.put("updatetoken/", dataReques);
       return Right(EntityResponse(
@@ -73,5 +75,6 @@ class AutenticationRemote implements AutenticationDataSource {
     } catch (e) {
       return Left(DataException(message: e.toString()));
     }
+ 
   }
 }

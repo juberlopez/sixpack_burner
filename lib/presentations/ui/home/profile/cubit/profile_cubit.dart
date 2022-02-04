@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:burnet_stack/device/device.dart';
-import 'package:burnet_stack/device/repositories/device_repository.dart';
-import 'package:burnet_stack/domain/domain.dart';
-import 'package:burnet_stack/presentations/services/screen_messages_service.dart';
+import 'package:sixpackburner/device/device.dart';
+import 'package:sixpackburner/device/repositories/device_repository.dart';
+import 'package:sixpackburner/domain/domain.dart';
+import 'package:sixpackburner/presentations/services/screen_messages_service.dart';
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
 

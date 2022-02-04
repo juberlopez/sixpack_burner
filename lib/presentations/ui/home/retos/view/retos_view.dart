@@ -1,7 +1,7 @@
-import 'package:burnet_stack/domain/domain.dart';
-import 'package:burnet_stack/presentations/ui/home/retos/cubit/retos_cubit.dart';
-import 'package:burnet_stack/presentations/ui/home/retos/widget/detalle_reto_widget.dart';
-import 'package:burnet_stack/presentations/ui/theme/app_theme.dart';
+import 'package:sixpackburner/domain/domain.dart';
+import 'package:sixpackburner/presentations/ui/home/retos/cubit/retos_cubit.dart';
+import 'package:sixpackburner/presentations/ui/home/retos/widget/detalle_reto_widget.dart';
+import 'package:sixpackburner/presentations/ui/theme/app_theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -135,7 +135,7 @@ class _RetoCardState extends State<RetoCard> {
                       child: FadeInImage(
                         image: NetworkImage(
                             widget.challengeModel.image.toString()),
-                        placeholder: AssetImage('assets/images/logo_reto.png'),
+                        placeholder: AssetImage('assets/images/load.jpg'),
                         fit: BoxFit.cover,
                         width: double.infinity,
                       )), /*ClipRRect(

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "285976757861",
+    "project_id": "burnersixpack",
+    "storage_bucket": "burnersixpack.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285976757861:android:98bbe5a9e1e851c644e88c",
+        "android_client_info": {
+          "package_name": "com.megaplexstars.burnersixpack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285976757861-ut3p20csr2kpm4vp5m45rcmlga1vp55g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.megaplexstars.burnersixpack",
+            "certificate_hash": "fdfec10f6f4d4dbaac75c4d648aff41107c5d444"
+          }
+        },
+        {
+          "client_id": "285976757861-07j1rch9pki72fcidd12ls5go7ds51va.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrhJF9YMjUXDqoBdckbg3cr7Y7AFei1yU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285976757861-07j1rch9pki72fcidd12ls5go7ds51va.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

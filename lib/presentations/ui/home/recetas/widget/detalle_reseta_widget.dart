@@ -1,6 +1,7 @@
-import 'package:burnet_stack/domain/domain.dart';
-import 'package:burnet_stack/presentations/ui/home/recetas/cubit/recetas_cubit.dart';
-import 'package:burnet_stack/presentations/ui/theme/app_theme.dart';
+import 'package:flutter/services.dart';
+import 'package:sixpackburner/domain/domain.dart';
+import 'package:sixpackburner/presentations/ui/home/recetas/cubit/recetas_cubit.dart';
+import 'package:sixpackburner/presentations/ui/theme/app_theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,9 +23,19 @@ class _DetalleRecetaWidgetState extends State<DetalleRecetaWidget> {
   int dataLike = 0;
   int cantidadLike = 0;
 
+@override
+void dispose(){
+   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle( statusBarColor: Colors.blueAccent));
+  super.dispose();
+}
+
+
+
+
   @override
   void initState() {
     super.initState();
+        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle( statusBarColor: Colors.transparent));
     like = widget.recipeModel.isLike!;
     favorite = widget.recipeModel.isFavorite!;
     cantidadLike = widget.recipeModel.likes!;

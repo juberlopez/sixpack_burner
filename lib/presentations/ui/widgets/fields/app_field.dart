@@ -1,4 +1,4 @@
-import 'package:burnet_stack/presentations/ui/theme/app_theme.dart';
+import 'package:sixpackburner/presentations/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -72,13 +72,13 @@ class AppField extends StatelessWidget {
                   enabledBorder: OutlineInputBorder(
                       borderSide:
                           BorderSide(color: AppTheme.tertiaryColor)),
-                  fillColor: AppTheme.secondaryColor,
+            fillColor: Colors.white54, filled: true,
                   labelText: labelText,
                   
                   focusedBorder: new OutlineInputBorder(
                       borderSide: new BorderSide(color: Colors.blue)),
                   labelStyle: TextStyle(
-                      color: labelTextColor == null
+                               color: labelTextColor == null
                           ? AppTheme.primaryColor
                           : labelTextColor),
                 ),

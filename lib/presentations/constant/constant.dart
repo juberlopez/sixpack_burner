@@ -2,6 +2,8 @@ class AppConstant {
   AppConstant._();
 
   static const PRODUCTO_BIPRO = "BI PRO";
+    static const PRODUCTO_RIPPED = "BIPRO RIPPED";
+    static const PRODUCTO_BIPROLITE = "BIPRO LITE";
   static const PRODUCTO_MEGAPLEXLITE = "MEGAPLEX LITE";
   static const PRODUCTO_NINGUNO = "NINGUNO";
   static const VEGETARIANO_SI = "VEGETARIANO";

@@ -1,8 +1,8 @@
-import 'package:burnet_stack/domain/domain.dart';
-import 'package:burnet_stack/presentations/ui/home/recetas/cubit/recetas_cubit.dart';
-import 'package:burnet_stack/presentations/ui/home/recetas/widget/detalle_reseta_widget.dart';
-import 'package:burnet_stack/presentations/ui/theme/app_theme.dart';
-import 'package:burnet_stack/presentations/ui/widgets/loading_indicator.dart';
+import 'package:sixpackburner/domain/domain.dart';
+import 'package:sixpackburner/presentations/ui/home/recetas/cubit/recetas_cubit.dart';
+import 'package:sixpackburner/presentations/ui/home/recetas/widget/detalle_reseta_widget.dart';
+import 'package:sixpackburner/presentations/ui/theme/app_theme.dart';
+import 'package:sixpackburner/presentations/ui/widgets/loading_indicator.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +25,7 @@ class _RecetasViewState extends State<RecetasView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.grey.shade200,
       body: Stack(
         children: [
           Column(

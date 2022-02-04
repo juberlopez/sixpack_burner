@@ -1,10 +1,10 @@
-import 'package:burnet_stack/presentations/constant/constant.dart';
-import 'package:burnet_stack/presentations/cubits/authentication_cubit/authentication_cubit.dart';
-import 'package:burnet_stack/presentations/ui/poll/poll_cubit/poll_cubit.dart';
-import 'package:burnet_stack/presentations/ui/poll/view/poll_info_view.dart';
-import 'package:burnet_stack/presentations/ui/poll/widgets/button_plus.dart';
-import 'package:burnet_stack/presentations/ui/widgets/buttons/app_button.dart';
-import 'package:burnet_stack/presentations/ui/widgets/loading_indicator.dart';
+import 'package:sixpackburner/presentations/constant/constant.dart';
+import 'package:sixpackburner/presentations/cubits/authentication_cubit/authentication_cubit.dart';
+import 'package:sixpackburner/presentations/ui/poll/poll_cubit/poll_cubit.dart';
+import 'package:sixpackburner/presentations/ui/poll/view/poll_info_view.dart';
+import 'package:sixpackburner/presentations/ui/poll/widgets/button_plus.dart';
+import 'package:sixpackburner/presentations/ui/widgets/buttons/app_button.dart';
+import 'package:sixpackburner/presentations/ui/widgets/loading_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +25,14 @@ class _PollHorasViewState extends State<PollHorasView> {
 
   @override
   Widget build(BuildContext context) {
+  
+final entrena= context.select((PollCubit b) => b.state.nivelActividadFisica).toString().contains("SEDENTARIO") ? false : true;
+if(!entrena){
+BlocProvider.of<PollCubit>(context).horaEntrenar("16:00");
+  BlocProvider.of<PollCubit>(context).noEntrena();
+}
+
+   
     return SafeArea(
       child: Scaffold(
         body: BlocListener<PollCubit, PollState>(
@@ -44,17 +52,18 @@ class _PollHorasViewState extends State<PollHorasView> {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 20,
+                        height: 50,
                       ),
                       Image.asset(
                         'assets/images/logo_reto.png',
-                        width: 177,
+                        width: 100,
                       ),
                       SizedBox(
                         width: 10,
+                        height: 20,
                       ),
                       Text(
-                        '''HORAS COMIDAS.''',
+                        '''HORAS COMIDAS''',
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: 'Quicksand',
@@ -62,7 +71,7 @@ class _PollHorasViewState extends State<PollHorasView> {
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(
-                        height: 10,
+                    height: 40,
                       ),
                       Row(
                         children: [
@@ -77,7 +86,8 @@ class _PollHorasViewState extends State<PollHorasView> {
                                     return FractionallySizedBox(
                                         heightFactor: 0.5,
                                         child: TimePiker(
-                                          onTimer: (data) {
+                                             type: _Timedefaul(hour: 05, minute: 00),
+                                        onTimer: (data) {
                                             print(data);
                                             BlocProvider.of<PollCubit>(context)
                                                 .horaDespertar(data);
@@ -95,35 +105,39 @@ class _PollHorasViewState extends State<PollHorasView> {
                           )),
                         ],
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                              child: ButtonPlus(
-                            onPressed: () {
-                              showModalBottomSheet(
-                                  backgroundColor: Colors.white,
-                                  context: context,
-                                  isScrollControlled: true,
-                                  builder: (context) {
-                                    return FractionallySizedBox(
-                                        heightFactor: 0.5,
-                                        child: TimePiker(
-                                          onTimer: (data) {
-                                            print(data);
-                                            BlocProvider.of<PollCubit>(context)
-                                                .horaEntrenar(data);
-                                            Navigator.of(context).pop();
-                                          },
-                                        ));
-                                  });
-                            },
-                            text: context.select((PollCubit b) {
-                              return b.state.horaEntrena.isNotEmpty
-                                  ? "ENTRENO A LAS  " + b.state.horaEntrena
-                                  : '¿A QUÉ HORAS ENTRENAS?';
-                            }),
-                          )),
-                        ],
+                     Visibility(
+                                visible: entrena,
+                                              child: Row(
+                          children: [
+                            Expanded(
+                                child: ButtonPlus(
+                              onPressed: () {
+                                showModalBottomSheet(
+                                    backgroundColor: Colors.white,
+                                    context: context,
+                                    isScrollControlled: true,
+                                    builder: (context) {
+                                      return FractionallySizedBox(
+                                          heightFactor: 0.5,
+                                          child: TimePiker(
+                                               type: _Timedefaul(hour: 18, minute: 30),
+                                            onTimer: (data) {
+                                              print(data);
+                                              BlocProvider.of<PollCubit>(context)
+                                                  .horaEntrenar(data);
+                                              Navigator.of(context).pop();
+                                            },
+                                          ));
+                                    });
+                              },
+                              text: context.select((PollCubit b) {
+                                return b.state.horaEntrena.isNotEmpty
+                                    ? "ENTRENO A LAS  " + b.state.horaEntrena
+                                    : '¿A QUÉ HORAS ENTRENAS?';
+                              }),
+                            )),
+                          ],
+                        ),
                       ),
                       Row(
                         children: [
@@ -138,6 +152,7 @@ class _PollHorasViewState extends State<PollHorasView> {
                                     return FractionallySizedBox(
                                         heightFactor: 0.5,
                                         child: TimePiker(
+                                             type: _Timedefaul(hour: 06, minute: 00),
                                           onTimer: (data) {
                                             print(data);
                                             BlocProvider.of<PollCubit>(context)
@@ -168,6 +183,7 @@ class _PollHorasViewState extends State<PollHorasView> {
                                     return FractionallySizedBox(
                                         heightFactor: 0.5,
                                         child: TimePiker(
+                                             type: _Timedefaul(hour: 13, minute: 00),
                                           onTimer: (data) {
                                             print(data);
                                             BlocProvider.of<PollCubit>(context)
@@ -204,6 +220,7 @@ class _PollHorasViewState extends State<PollHorasView> {
                                     return FractionallySizedBox(
                                         heightFactor: 0.5,
                                         child: TimePiker(
+                                             type: _Timedefaul(hour: 20, minute: 00),
                                           onTimer: (data) {
                                             print(data);
                                             BlocProvider.of<PollCubit>(context)
@@ -223,14 +240,17 @@ class _PollHorasViewState extends State<PollHorasView> {
                       ),
                       Row(
                         children: [
-                          Expanded(
+                           Expanded(
                             child: Container(
+                               margin: const EdgeInsets.only(top: 20.0),
                               child: AppButton(
                                 label: 'Siguiente',
+
                                 onPressed: () {
                                   if (BlocProvider.of<PollCubit>(context)
                                       .nextTree()) {
-                                    showModalBottomSheet(
+                                  if(entrena){
+                                      showModalBottomSheet(
                                         backgroundColor: Colors.transparent,
                                         context: context,
                                         isScrollControlled: true,
@@ -250,7 +270,7 @@ class _PollHorasViewState extends State<PollHorasView> {
                                                           const EdgeInsets.all(
                                                               15.0),
                                                       child: Text(
-                                                        "Consumir un batido de proteina en dietas para perder grasa es muy importante para mantener la masa muscular. ¿Deseas tu plan nutricional con alguno de los siguientes batidos? Selecciona una opción",
+                                                        "Consumir un batido de proteina en dietas para perder grasa es muy importante para mantener la masa muscular. ¿Deseas tu plan nutricional con alguno de los siguientes batidos? Selecciona una opción:",
                                                         textAlign:
                                                             TextAlign.center,
                                                       ),
@@ -300,12 +320,65 @@ class _PollHorasViewState extends State<PollHorasView> {
                                                                   height: 80,
                                                                 ),
                                                                 Text(
-                                                                    "Megaplex Life")
+                                                                    "Megaplex Lite")
                                                               ],
                                                             ),
                                                           ),
                                                         ),
                                                         Expanded(
+                                                          child:
+                                                              GestureDetector(
+                                                            onTap: () {
+                                                              BlocProvider.of<
+                                                                          PollCubit>(
+                                                                      context)
+                                                                  .producto(
+                                                                      AppConstant
+                                                                          .PRODUCTO_BIPROLITE);
+                                                            },
+                                                            child: Column(
+                                                              children: [
+                                                                Image.asset(
+                                                                  'assets/images/biprolite.png',
+                                                                  height: 80,
+                                                                ),
+                                                                Text(
+                                                                    "Bipro lite")
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                   SizedBox(height: 20,),
+                                                      Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child:
+                                                              GestureDetector(
+                                                            onTap: () {
+                                                              BlocProvider.of<
+                                                                          PollCubit>(
+                                                                      context)
+                                                                  .producto(
+                                                                      AppConstant
+                                                                          .PRODUCTO_RIPPED);
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child: Column(
+                                                              children: [
+                                                                Image.asset(
+                                                                  'assets/images/ripped.png',
+                                                                  height: 80,
+                                                                ),
+                                                                Text("Bipro Ripped")
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                           Expanded(
                                                           child:
                                                               GestureDetector(
                                                             onTap: () {
@@ -334,6 +407,8 @@ class _PollHorasViewState extends State<PollHorasView> {
                                                 ),
                                               ));
                                         });
+                                  }else BlocProvider.of<PollCubit>(context).next();
+                                  
                                     /*Navigator.pushNamed(
                                               context, PollAntroView.routeName);*/
                                   }
@@ -417,7 +492,7 @@ class _PollHorasViewState extends State<PollHorasView> {
           return FractionallySizedBox(
               heightFactor: 0.3,
               child: TimePiker(
-                onTimer: (data) {
+                      onTimer: (data) {
                   print(data);
                   BlocProvider.of<PollCubit>(context).horaDesayunar(data);
                   Navigator.of(context).pop();
@@ -488,19 +563,23 @@ class _ImagenBackGround extends StatelessWidget {
 
 class TimePiker extends StatefulWidget {
   final Function onTimer;
-  const TimePiker({Key? key, required this.onTimer}) : super(key: key);
+  final _Timedefaul? type;
+  const TimePiker({Key? key, required this.onTimer, this.type}) : super(key: key);
 
   @override
-  _TimePikerState createState() => _TimePikerState();
+  _TimePikerState createState() => _TimePikerState(this.type);
 }
 
 class _TimePikerState extends State<TimePiker> {
   late TimeOfDay time;
-
+  final _Timedefaul? type;
+  _TimePikerState(this.type);
+var timeDefault= DateTime(1969, 1, 1, 6, 0);
   @override
   void initState() {
     super.initState();
-    time = new TimeOfDay(hour: 00, minute: 00);
+      time =  this.type!=null ? new TimeOfDay(hour: this.type!.hour, minute: this.type!.minute) : new TimeOfDay(hour: 00, minute: 00);
+    if(this.type!=null) timeDefault= DateTime(1969, 1, 1, this.type!.hour,this.type!.minute);
   }
 
   @override
@@ -540,7 +619,7 @@ class _TimePikerState extends State<TimePiker> {
           height: 200,
           child: CupertinoDatePicker(
             mode: CupertinoDatePickerMode.time,
-            initialDateTime: DateTime(1969, 1, 1, 0, 0),
+            initialDateTime: timeDefault,
             onDateTimeChanged: (DateTime newDateTime) {
               setState(() {
                 time = TimeOfDay.fromDateTime(newDateTime);
@@ -555,4 +634,11 @@ class _TimePikerState extends State<TimePiker> {
       ],
     );
   }
+}
+
+
+class _Timedefaul {
+int hour=0;
+int minute=0;
+_Timedefaul({required this.hour, required this.minute});
 }

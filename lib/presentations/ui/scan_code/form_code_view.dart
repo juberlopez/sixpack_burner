@@ -1,10 +1,10 @@
-import 'package:burnet_stack/presentations/cubits/authentication_cubit/authentication_cubit.dart';
-import 'package:burnet_stack/presentations/services/screen_messages_service.dart';
-import 'package:burnet_stack/presentations/ui/home/view/home_view.dart';
-import 'package:burnet_stack/presentations/ui/poll/view/poll_view.dart';
-import 'package:burnet_stack/presentations/ui/widgets/buttons/app_button.dart';
-import 'package:burnet_stack/presentations/ui/widgets/fields/app_field.dart';
-import 'package:burnet_stack/presentations/ui/widgets/loading_indicator.dart';
+import 'package:sixpackburner/presentations/cubits/authentication_cubit/authentication_cubit.dart';
+import 'package:sixpackburner/presentations/services/screen_messages_service.dart';
+import 'package:sixpackburner/presentations/ui/home/view/home_view.dart';
+import 'package:sixpackburner/presentations/ui/poll/view/poll_view.dart';
+import 'package:sixpackburner/presentations/ui/widgets/buttons/app_button.dart';
+import 'package:sixpackburner/presentations/ui/widgets/fields/app_field.dart';
+import 'package:sixpackburner/presentations/ui/widgets/loading_indicator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

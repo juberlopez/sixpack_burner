@@ -1,10 +1,10 @@
 import 'dart:ffi';
 
-import 'package:burnet_stack/presentations/cubits/authentication_cubit/authentication_cubit.dart';
-import 'package:burnet_stack/presentations/ui/login/view/login_view.dart';
-import 'package:burnet_stack/presentations/ui/register/widgets/form_register.dart';
-import 'package:burnet_stack/presentations/ui/theme/app_theme.dart';
-import 'package:burnet_stack/presentations/ui/widgets/loading_indicator.dart';
+import 'package:sixpackburner/presentations/cubits/authentication_cubit/authentication_cubit.dart';
+import 'package:sixpackburner/presentations/ui/login/view/login_view.dart';
+import 'package:sixpackburner/presentations/ui/register/widgets/form_register.dart';
+import 'package:sixpackburner/presentations/ui/theme/app_theme.dart';
+import 'package:sixpackburner/presentations/ui/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:open_mail_app/open_mail_app.dart';
@@ -78,9 +78,9 @@ class _RegisterViewState extends State<RegisterView> {
                       height: 20,
                     ),
                     Image.asset(
-                      'assets/splash/logo.png',
+                      'assets/splash/logomegaplexstars.png',
                       //width: 325,
-                      height: 51,
+                      height: 150,
                     ),
                     FormRegister(),
                     SizedBox(
@@ -88,6 +88,7 @@ class _RegisterViewState extends State<RegisterView> {
                     ),
                     Container(
                       alignment: Alignment.center,
+                      padding: EdgeInsets.only(bottom: 40.0),
                       child: Center(
                           child: Row(
                         children: [

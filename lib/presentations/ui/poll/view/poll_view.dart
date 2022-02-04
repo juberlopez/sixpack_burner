@@ -1,12 +1,12 @@
-import 'package:burnet_stack/presentations/constant/constant.dart';
-import 'package:burnet_stack/presentations/cubits/authentication_cubit/authentication_cubit.dart';
-import 'package:burnet_stack/presentations/services/screen_messages_service.dart';
-import 'package:burnet_stack/presentations/ui/poll/poll_cubit/poll_cubit.dart';
-import 'package:burnet_stack/presentations/ui/poll/view/poll_antro_view.dart';
-import 'package:burnet_stack/presentations/ui/poll/widgets/button_plus.dart';
-import 'package:burnet_stack/presentations/ui/widgets/buttons/app_button.dart';
-import 'package:burnet_stack/presentations/ui/widgets/fields/app_field.dart';
-import 'package:burnet_stack/presentations/ui/widgets/loading_indicator.dart';
+import 'package:sixpackburner/presentations/constant/constant.dart';
+import 'package:sixpackburner/presentations/cubits/authentication_cubit/authentication_cubit.dart';
+import 'package:sixpackburner/presentations/services/screen_messages_service.dart';
+import 'package:sixpackburner/presentations/ui/poll/poll_cubit/poll_cubit.dart';
+import 'package:sixpackburner/presentations/ui/poll/view/poll_antro_view.dart';
+import 'package:sixpackburner/presentations/ui/poll/widgets/button_plus.dart';
+import 'package:sixpackburner/presentations/ui/widgets/buttons/app_button.dart';
+import 'package:sixpackburner/presentations/ui/widgets/fields/app_field.dart';
+import 'package:sixpackburner/presentations/ui/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiver/iterables.dart';
@@ -190,8 +190,7 @@ class _PollViewState extends State<PollView> {
                               onPressed: () {
                                 if (BlocProvider.of<PollCubit>(context)
                                     .nextOne()) {
-                                  Navigator.pushNamed(
-                                      context, PollAntroView.routeName);
+                                  Navigator.pushNamed(context, PollAntroView.routeName);
                                 }
                               },
                             ),
@@ -254,7 +253,7 @@ class _PollViewState extends State<PollView> {
                           children: [
                             Container(
                               child: Padding(
-                                padding: const EdgeInsets.only(top: 10),
+                                padding: const EdgeInsets.only(top: 10, bottom: 20),
                                 child: Container(
                                   child: Column(
                                     children: [
@@ -276,6 +275,8 @@ class _PollViewState extends State<PollView> {
                                   child: Container(
                                     child: AppButton(
                                       label: 'Cancelar',
+                                      textColor: Colors.black87,
+                                             color: Colors.white60,
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
@@ -345,7 +346,7 @@ class _PollViewState extends State<PollView> {
                           children: [
                             Container(
                               child: Padding(
-                                padding: const EdgeInsets.only(top: 10),
+                                padding: const EdgeInsets.only(top: 10, bottom: 20),
                                 child: Container(
                                   child: Column(
                                     children: [
@@ -362,10 +363,12 @@ class _PollViewState extends State<PollView> {
                               ),
                             ),
                             Row(
-                              children: [
+                                children: [
                                 Expanded(
                                   child: Container(
-                                    child: AppButton(
+                                        child: AppButton(
+                                         textColor: Colors.black87,
+                                             color: Colors.white60,
                                       label: 'Cancelar',
                                       onPressed: () {
                                         Navigator.of(context).pop();
@@ -549,7 +552,7 @@ class _PollViewState extends State<PollView> {
               heightFactor: 1,
               child: SingleChildScrollView(
                 child: Column(
-                    children: range(150, 200)
+                    children: range(160, 200)
                         .map((e) => GestureDetector(
                             onTap: () {
                               BlocProvider.of<PollCubit>(context)
@@ -565,7 +568,7 @@ class _PollViewState extends State<PollView> {
                                       height: 50,
                                       decoration: BoxDecoration(
                                           border:
-                                              Border.all(color: Colors.grey)),
+                                              Border(bottom: BorderSide(color: Colors.grey.shade300))),
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Center(
@@ -617,9 +620,3 @@ class ListarEstaturas extends StatelessWidget {
   }
 }
     
-/**
- * .map((e) => ItemCategoria(
-                        listaReproduccion: e,
-                      ))
-                  .toList(),
- */

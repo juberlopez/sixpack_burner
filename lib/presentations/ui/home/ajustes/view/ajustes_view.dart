@@ -1,14 +1,15 @@
-import 'package:burnet_stack/domain/domain.dart';
-import 'package:burnet_stack/presentations/cubits/authentication_cubit/authentication_cubit.dart';
-import 'package:burnet_stack/presentations/ui/home/ajustes/cubit/ajustes_cubit.dart';
-import 'package:burnet_stack/presentations/ui/home/profile/cubit/profile_cubit.dart';
-import 'package:burnet_stack/presentations/ui/home/profile/view/profile_view.dart';
-import 'package:burnet_stack/presentations/ui/home/recetas/cubit/recetas_cubit.dart';
-import 'package:burnet_stack/presentations/ui/home/recordatorio/view/recordatorio_view.dart';
-import 'package:burnet_stack/presentations/ui/poll/view/poll_view.dart';
-import 'package:burnet_stack/presentations/ui/theme/app_theme.dart';
+import 'package:sixpackburner/domain/domain.dart';
+import 'package:sixpackburner/presentations/cubits/authentication_cubit/authentication_cubit.dart';
+import 'package:sixpackburner/presentations/ui/home/ajustes/cubit/ajustes_cubit.dart';
+import 'package:sixpackburner/presentations/ui/home/profile/cubit/profile_cubit.dart';
+import 'package:sixpackburner/presentations/ui/home/profile/view/profile_view.dart';
+import 'package:sixpackburner/presentations/ui/home/recetas/cubit/recetas_cubit.dart';
+import 'package:sixpackburner/presentations/ui/home/recordatorio/view/recordatorio_view.dart';
+import 'package:sixpackburner/presentations/ui/poll/view/poll_view.dart';
+import 'package:sixpackburner/presentations/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sixpackburner/presentations/ui/welcome/view/welcome_view.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -43,7 +44,7 @@ class _AjustesViewState extends State<AjustesView> {
                           0.0,
                           1,
                         ], colors: AppTheme.secondarylinearGradiant),
-                        borderRadius: BorderRadius.circular(8.0)),
+                      ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Center(
@@ -114,11 +115,11 @@ class _AjustesViewState extends State<AjustesView> {
                     color: Colors.white,
                     child: ListTile(
                       leading: Icon(Icons.camera_rear),
-                      title: Text('Terminos y condiciones'),
+                      title: Text('Términos y condiciones'),
                       trailing: Icon(Icons.arrow_forward_ios),
                       onTap: () async {
                         await launch(
-                            'https://retoburnerstack.megaplexstars.com/#conditions');
+                            'https://sixpackburner.megaplexstars.com/#conditions');
                       },
                     ),
                   ),
@@ -133,7 +134,7 @@ class _AjustesViewState extends State<AjustesView> {
                       trailing: Icon(Icons.arrow_forward_ios),
                       onTap: () async {
                         await launch(
-                            'https://retoburnerstack.megaplexstars.com/#policy');
+                            'https://sixpackburner.megaplexstars.com/#policy');
                       },
                     ),
                   ),
@@ -159,6 +160,8 @@ class _AjustesViewState extends State<AjustesView> {
                     child: ListTile(
                       onTap: () {
                         BlocProvider.of<AuthenticationCubit>(context).logOut();
+                          // Navigator.pushNamed(context, WelcomeView.routeName);
+                                 Navigator.pushNamedAndRemoveUntil(context, WelcomeView.routeName, (r) => false);
                       },
                       leading: Icon(Icons.arrow_back),
                       title: Text('Cerrar Sesion'),

@@ -1,8 +1,8 @@
-import 'package:burnet_stack/data/api/api.dart';
+import 'package:sixpackburner/data/api/api.dart';
 import 'package:dartz/dartz.dart';
-import 'package:burnet_stack/data/exceptions/data_exception.dart';
-import 'package:burnet_stack/data/entities/response/entity_response.dart';
-import 'package:burnet_stack/data/entities/request/login_entity_request.dart';
+import 'package:sixpackburner/data/exceptions/data_exception.dart';
+import 'package:sixpackburner/data/entities/response/entity_response.dart';
+import 'package:sixpackburner/data/entities/request/login_entity_request.dart';
 
 import '../../data.dart';
 import '../recipe_data_source.dart';

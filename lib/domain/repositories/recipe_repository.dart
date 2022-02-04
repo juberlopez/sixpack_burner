@@ -1,7 +1,7 @@
-import 'package:burnet_stack/data/data.dart';
-import 'package:burnet_stack/device/device.dart';
-import 'package:burnet_stack/domain/exceptions/domain_exception.dart';
-import 'package:burnet_stack/domain/models/response_model.dart';
+import 'package:sixpackburner/data/data.dart';
+import 'package:sixpackburner/device/device.dart';
+import 'package:sixpackburner/domain/exceptions/domain_exception.dart';
+import 'package:sixpackburner/domain/models/response_model.dart';
 import 'package:dartz/dartz.dart';
 
 import '../domain.dart';
