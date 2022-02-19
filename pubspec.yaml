@@ -42,7 +42,7 @@ dependencies:
   reactive_dropdown_search: ^0.2.1
   reactive_date_time_picker: ^0.1.4
   dropdown_search: ^0.6.3
-  google_fonts: ^2.0.0
+  google_fonts: 2.0.0
   dio: ^4.0.0
   json_annotation: ^4.1.0
   open_mail_app: ^0.2.0
