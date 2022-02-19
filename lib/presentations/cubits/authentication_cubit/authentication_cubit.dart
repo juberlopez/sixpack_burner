@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -431,11 +431,21 @@ String? token= await FirebaseMessaging.instance.getToken();
   }
 
   Future<void> getCiudades() async {
-    http
-        .get(Uri.parse(
-            'https://nutramerican.com/api_MegaplexStar/api/ciudades/'))
+    // http.get(Uri.parse('https://nutramerican.com/api_MegaplexStar/api/ciudades/'))
+    //     .then((response) {
+    //   Iterable list = json.decode(response.body);
+    //   List<CityModel> listaCiudades =
+    //       list.map((model) => CityModel.fromJson(model)).toList();
+
+    //   emit(state.copyWith(
+    //       ciudades: listaCiudades,
+    //       ciudadesPlus: listaCiudades.map((e) => e.ciudada).toList()));
+    //   print(listaCiudades);
+    // });
+
+  rootBundle.loadString('assets/data/ciudades.json')
         .then((response) {
-      Iterable list = json.decode(response.body);
+       Iterable list = json.decode(response);
       List<CityModel> listaCiudades =
           list.map((model) => CityModel.fromJson(model)).toList();
 
@@ -445,5 +455,10 @@ String? token= await FirebaseMessaging.instance.getToken();
 
       print(listaCiudades);
     });
+
+
+
+
+
   }
 }

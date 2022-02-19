@@ -16,7 +16,15 @@ arreglar el número del control: ok
 Guardar el menú elegido:ok 
 identificar si es iphone o android: ok
 aumentar área táctil en el botón de cambiar menú: ok
+activar notificaciones locales android: ok
+quitar decimales e información del post entreno en notificaciones locales:ok
+cambiar foto de deportistas en información:ok
+añadir archivo de configuración firebase para ios:ok
+añadir ciudades de honduras:ok
+actualizar link a páginas:ok
 
-activar notificaciones locales android
-optimizar módulo de adjuntar la foto 
-actualizar link a páginas
+optimizar módulo de adjuntar la foto al remover la foto y volver a tomarla no actualiza el wiget: pendiente
+
+Notas:
+Se cambia la versión mínima de android a 26 porque el paquete flutter_native_timezone: ^1.0.10 no funciona en versiones anteriores.
+flutter 2.10.0

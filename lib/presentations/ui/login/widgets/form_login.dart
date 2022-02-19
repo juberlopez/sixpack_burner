@@ -114,7 +114,7 @@ class _FormLoginState extends State<FormLogin> {
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () async {
                                         await launch(
-                                            'https://burnersixpack.megaplexstars.com/#policy');
+                                            'https://retoburnerstack.megaplexstars.com/#policy');
                                         // open desired screen
                                       }),
                                 TextSpan(
@@ -134,7 +134,7 @@ class _FormLoginState extends State<FormLogin> {
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () async {
                                         await launch(
-                                            'https://burnersixpack.megaplexstars.com/#conditions');
+                                            'https://retoburnerstack.megaplexstars.com/#conditions');
                                         }),
                                 TextSpan(
                                     text: ' de Megaplex Stars.',

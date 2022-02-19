@@ -104,7 +104,7 @@ color: Colors.white,
 fontWeight: FontWeight.bold)),
 Padding(
 padding: const EdgeInsets.only(
-left: 20.0, top: 10, right: 20),
+left: 19, top: 10, right: 19),
 child: Row(
 children: [
 Column(

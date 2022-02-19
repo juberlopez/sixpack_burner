@@ -107,8 +107,7 @@ if (snapshot.connectionState == ConnectionState.done) {
     }
   });
 
-  final AndroidInitializationSettings initializationSettingsAndroid =
-      AndroidInitializationSettings('app_icon');
+  final AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('star4');
 
 
   final IOSInitializationSettings initializationSettingsIOS =

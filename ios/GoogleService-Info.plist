@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>831216009507-hq6sdscilc4ndjnkfr31hlbue65nav8q.apps.googleusercontent.com</string>
+	<string>285976757861-linha626rkua69cpr9q3shq2afsggn4m.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.831216009507-hq6sdscilc4ndjnkfr31hlbue65nav8q</string>
+	<string>com.googleusercontent.apps.285976757861-linha626rkua69cpr9q3shq2afsggn4m</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>831216009507-77a3qhkeo72r42p2ego27rc1ea2qbrqc.apps.googleusercontent.com</string>
+	<string>285976757861-ut3p20csr2kpm4vp5m45rcmlga1vp55g.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAnXqVNysHCtbOOyQjQoIxo4c81CKxFD90</string>
+	<string>AIzaSyBGMDUzZC_pcLmltaaDfb2nDiiX-XsdjvQ</string>
 	<key>GCM_SENDER_ID</key>
-	<string>831216009507</string>
+	<string>285976757861</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>co.com.burnetstack.burnetStack1</string>
+	<string>com.megaplexstars.burnersixpack</string>
 	<key>PROJECT_ID</key>
-	<string>reto-burnerstack</string>
+	<string>burnersixpack</string>
 	<key>STORAGE_BUCKET</key>
-	<string>reto-burnerstack.appspot.com</string>
+	<string>burnersixpack.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:831216009507:ios:7500f96a1d24036f408c96</string>
+	<string>1:285976757861:ios:53e535497c5c28fb44e88c</string>
 </dict>
 </plist>

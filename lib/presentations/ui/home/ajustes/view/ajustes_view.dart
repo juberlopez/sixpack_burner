@@ -119,7 +119,7 @@ class _AjustesViewState extends State<AjustesView> {
                       trailing: Icon(Icons.arrow_forward_ios),
                       onTap: () async {
                         await launch(
-                            'https://sixpackburner.megaplexstars.com/#conditions');
+                            'https://retoburnerstack.megaplexstars.com/#conditions');
                       },
                     ),
                   ),
@@ -134,7 +134,7 @@ class _AjustesViewState extends State<AjustesView> {
                       trailing: Icon(Icons.arrow_forward_ios),
                       onTap: () async {
                         await launch(
-                            'https://sixpackburner.megaplexstars.com/#policy');
+                            'https://retoburnerstack.megaplexstars.com/#policy');
                       },
                     ),
                   ),

@@ -162,7 +162,7 @@ class _InfoViewState extends State<InfoView> {
                                 onChanged: (value) {
                                   context
                                       .read<PollCubit>()
-                                      .initNotification(value);
+                                      .initNotificationTest(value);
                                 },
                                 //activeTrackColor: UiTheme.primaryColor.withOpacity(0.3),
                                 //activeColor: UiTheme.primaryColor,

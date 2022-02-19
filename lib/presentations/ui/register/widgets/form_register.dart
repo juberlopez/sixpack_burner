@@ -266,7 +266,7 @@ this.so="IOS";
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () async {
                                               await launch(
-                                                  'https://sixpackburner.megaplexstars.com/#policy');
+                                                  'https://retoburnerstack.megaplexstars.com/#policy');
                                               // open desired screen
                                             }),
                                       TextSpan(
@@ -286,7 +286,7 @@ this.so="IOS";
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () async {
                                               await launch(
-                                                  'https://sixpackburner.megaplexstars.com/#conditions');
+                                                  'https://retoburnerstack.megaplexstars.com/#conditions');
                                               print("data"); // open desired screen
                                             }),
                                       TextSpan(
